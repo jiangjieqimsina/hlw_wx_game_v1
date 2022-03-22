@@ -1,0 +1,13 @@
+{
+  "deviceOrientation": "portrait",
+  "subpackages": [
+    {
+      "name": "codeB",
+      "root": "codeB.js"
+    },
+    {
+      "name": "codeC",
+      "root": "codeC.js"
+    }
+  ]
+}
