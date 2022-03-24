@@ -10,4 +10,5 @@
       "root": "codeC.js"
     }
   ]
+  ,"openDataContext": "src/myOpenDataContext"
 }

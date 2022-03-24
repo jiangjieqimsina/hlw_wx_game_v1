@@ -39,7 +39,7 @@
         "ignoreUploadUnusedFiles": true
     },
     "compileType": "game",
-    "libVersion": "2.14.1",
+    "libVersion": "2.23.1",
     "appid": "wxdcd6f52cdcdb8ff2",
     "projectname": "wxmini",
     "simulatorType": "wechat",
