@@ -1,0 +1,14 @@
+{
+	"version": "0.2.0",
+	"configurations": [ 
+		{	
+			"name": "launch",
+			"type": "chrome",
+			"request": "launch",
+			// "url": "http://127.0.0.1:8002/index.html",
+			// "webRoot": "${workspaceRoot}/bin",
+			"url":"http://127.0.0.1:8001/layabox_test/main/bin/index.html",			
+			"webRoot": "D:/"
+        }
+    ]
+}

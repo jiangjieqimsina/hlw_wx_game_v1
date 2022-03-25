@@ -13,9 +13,7 @@ module ui {
         
             super.createChildren();
             this.createView(ui.PaiHangItemViewUI.uiView);
-
         }
-
     }
 }
 
@@ -30,8 +28,6 @@ module ui {
 
             super.createChildren();
             this.createView(ui.PaiHangVIewUI.uiView);
-
         }
-
     }
 }
