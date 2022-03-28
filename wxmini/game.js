@@ -91,6 +91,7 @@ const loadTask1 = wx.loadSubpackage({
   success(res) {
     subComplete ++;
     checkComplete();
+    require("main.js");//加载开放域主域模块
     // 分包加载成功后通过 success 回调
   },
   fail(res) {
