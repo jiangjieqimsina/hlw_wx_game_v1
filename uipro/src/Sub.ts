@@ -106,6 +106,7 @@ namespace sub {
 
         private onRenderHandler(item:ui.PaiHangItemViewUI,index:number):void{
             // console.log(item.dataSource);
+            item.hitArea = new Laya.Rectangle(0,0,item.width,item.height);
             let _vo:IWeiXinFriendVO = item.dataSource;
             item.img.skin = _vo.avatarUrl;
             item.playerName.text = _vo.nickname;

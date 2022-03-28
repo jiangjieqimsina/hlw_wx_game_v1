@@ -7,13 +7,15 @@ module ui {
 		public rank:Laya.Label;
 		public playerName:Laya.Label;
 
-        public static  uiView:any ={"type":"View","props":{"width":400,"height":150},"child":[{"type":"Image","props":{"y":24,"width":100,"var":"img","height":100}},{"type":"Label","props":{"y":73,"x":288,"width":80,"var":"rank","text":"label","height":12,"color":"#ffffff","align":"center"}},{"type":"Label","props":{"y":73,"x":113,"width":186,"var":"playerName","text":"label","height":12,"color":"#ffffff","align":"center"}}]};
+        public static  uiView:any ={"type":"View","props":{"width":400,"height":150},"child":[{"type":"Image","props":{"y":24,"width":100,"var":"img","height":100}},{"type":"Label","props":{"y":73,"x":288,"width":80,"var":"rank","text":"label","height":12,"fontSize":32,"color":"#ffffff","align":"center"}},{"type":"Label","props":{"y":73,"x":113,"width":186,"var":"playerName","text":"label","height":12,"fontSize":32,"color":"#ffffff","align":"center"}}]};
         constructor(){ super()}
         createChildren():void {
         
             super.createChildren();
             this.createView(ui.PaiHangItemViewUI.uiView);
+
         }
+
     }
 }
 
@@ -28,6 +30,8 @@ module ui {
 
             super.createChildren();
             this.createView(ui.PaiHangVIewUI.uiView);
+
         }
+
     }
 }
