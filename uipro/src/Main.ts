@@ -27,29 +27,32 @@ namespace wxmi {
 
     export class Main{
         private drawSprite:DrawSprite;
-        private isInit:boolean = false;
+        private isOpen:boolean = false;
         /**
          * 主域初始化
          */
         public open(dType):void{
-            if(!this.drawSprite){
-                this.drawSprite = new DrawSprite();
-            }
-            Laya.stage.addChild(this.drawSprite);
-            if(!this.isInit){
+ 
+            if(!this.isOpen){
                 let sharedCanvas=Laya.Browser.window.sharedCanvas;
                 sharedCanvas.width = Laya.stage.width;
                 sharedCanvas.height = Laya.stage.height;
                 wx.postMessage({ type: -1, data: { width: Laya.stage.width, height: Laya.stage.height, matrix: Laya.stage._canvasTransform } });
-                this.isInit = true;
+                    // this.isInit = true;
+                this.isOpen = true;    
             }
             wx.postMessage({type:dType});
+            if(!this.drawSprite){
+                this.drawSprite = new DrawSprite();
+            }
+            Laya.stage.addChild(this.drawSprite);
         }
 
         /**
          * 清空sharedCanvas
          */
         public clear():void{
+            this.isOpen = false;
             let sharedCanvas=Laya.Browser.window.sharedCanvas;
             sharedCanvas.width = 1;
             sharedCanvas.height = 1;
@@ -77,6 +80,8 @@ namespace wxmi {
 
         public setCloseBtn(x,y,w,h):void{
             this.hitArea = new Laya.Rectangle(0,0,Laya.stage.width,Laya.stage.height);
+            this.closeBtn.x = x;
+            this.closeBtn.y = y;
             this.closeBtn.graphics.drawRect(0,0,w,h,"#ff0000");
             this.closeBtn.hitArea = new Laya.Rectangle(0,0,w,h);
             this.closeBtn.on(Laya.Event.CLICK,this,this.onClose);
@@ -93,6 +98,12 @@ namespace wxmi {
         Laya.stage.addChild(maskClick);
         main.open(1);
     }
+
+    // Laya.stage.on(Laya.Event.MOUSE_UP,window,(e)=>{
+    //     // console.log(e);
+    //     window["hlwWX_openRank"]();
+    // });
+    
 }
 
 

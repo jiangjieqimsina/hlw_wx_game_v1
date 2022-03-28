@@ -1,16 +1,15 @@
 /*
 1.安装依赖npm install uglify-js -g
-
 */
-
 //压缩代码,copy代码到wxmini工程
 var fs=  require("fs");
 var process = require('child_process');
 process.execSync("layacmd compile");
 
-//主域
-// let str = fs.readFileSync("bin/js/main.js", "utf-8");
+//编译主域代码
 process.execSync("uglifyjs bin/js/main.js -m -o ../wxmini/main.js");
-
-// fs.writeFileSync("D://weixin_project//Layaair_wx2//main_minigame//src//myOpenDataContext//son.min.js", str);
-// console.log(str);
+//编译子域代码
+let ui = fs.readFileSync("bin/js/ui/layaUI.max.all.js", "utf-8");
+let sub =  fs.readFileSync("bin/js/sub.js", "utf-8");
+fs.writeFileSync("bin/js/subout.js",ui+sub,"utf-8");
+process.execSync("uglifyjs bin/js/subout.js -m -o ../wxmini/src/myOpenDataContext/subout.js");
