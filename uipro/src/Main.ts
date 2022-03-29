@@ -29,9 +29,9 @@ namespace wxmi {
         private drawSprite:DrawSprite;
         private isOpen:boolean = false;
         /**
-         * 主域初始化
+         * 主域初始化,打开界面
          */
-        public open(dType):void{
+        public open(_cls:string):void{
  
             if(!this.isOpen){
                 let sharedCanvas=Laya.Browser.window.sharedCanvas;
@@ -41,7 +41,7 @@ namespace wxmi {
                     // this.isInit = true;
                 this.isOpen = true;    
             }
-            wx.postMessage({type:dType});
+            wx.postMessage({type:1,cls:_cls});
             if(!this.drawSprite){
                 this.drawSprite = new DrawSprite();
             }
@@ -90,19 +90,17 @@ namespace wxmi {
 
     let maskClick = new MaskClickView();    
     let main = new Main();
-    /**
-     * 打开排行版
-     */
-    window["hlwWX_openRank"]=function(){
-        maskClick.setCloseBtn(50,50,100,30);//设置关闭按钮的位置和宽高
+
+    window["tr_openSub"]=function(x,y,w,h,ui){
+        maskClick.setCloseBtn(x,y,w,h);//设置关闭按钮的位置和宽高
         Laya.stage.addChild(maskClick);
-        main.open(1);
+        main.open(ui);
     }
 
-    // Laya.stage.on(Laya.Event.MOUSE_UP,window,(e)=>{
-    //     // console.log(e);
-    //     window["hlwWX_openRank"]();
-    // });
+    Laya.stage.on(Laya.Event.MOUSE_UP,window,(e)=>{
+        window["tr_openSub"](50,50,100,100,"sub.HlwRankView");
+    });
+
     
 }
 
