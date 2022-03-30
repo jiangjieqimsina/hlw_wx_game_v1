@@ -97,9 +97,9 @@ namespace wxmi {
         main.open(ui);
     }
 
-    Laya.stage.on(Laya.Event.MOUSE_UP,window,(e)=>{
-        window["tr_openSub"](50,50,100,100,"sub.HlwRankView");
-    });
+    // Laya.stage.on(Laya.Event.MOUSE_UP,window,(e)=>{
+    //     window["tr_openSub"](50,50,100,100,"sub.HlwRankView");
+    // });
 
     
 }
