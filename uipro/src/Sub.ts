@@ -35,8 +35,7 @@ namespace sub {
             let _that = this;
             wx.onMessage((message: Object)=>{
                 let type = message['type'];
-                var timestamp =new Date();
-                console.log("type:"+type + ","+(timestamp.getTime()/1000));
+                console.log(new Date().getTime()/1000+" type:"+type);
 
                 switch (type) {
                     case -1:
@@ -83,7 +82,7 @@ namespace sub {
                         m.getFriendsStateData({
                             success: res => {
                                 list = res.list
-                                console.log('>获取好友列表', list)
+                                console.log((new Date().getTime()/1000)+' ##获取好友列表', list);
                             },
                             fail: res => {
                                 console.error('获取好友列表失败');

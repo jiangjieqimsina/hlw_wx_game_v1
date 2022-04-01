@@ -1,4 +1,6 @@
-
+# 说明
+Main.ts主域启动入口  
+Sub.ts开放域启动入口
 
 # 添加需要的模块路径
 module.json  
@@ -10,14 +12,22 @@ module.json
 }
 ```
 
-# 调用方法
-tr_openSub(close_x,close_y,close_w,close_h,ui_str);
+# 接口说明
 ```
-window["tr_openSub"](50,50,100,100,"sub.HlwRankView");
+//打开一个开放域的界面到开发域舞台,关闭按钮的坐标为50,50,在舞台中的位置为100,100
+window["tr_wx_openSub"](50,50,100,100,"sub.HlwRankView");
+
+//获取好友列表 开放域Sub.ts中type=3类型接收列表数据
+window["tr_wx_getFriendsList"]((err)=>{
+    console.log(err)
+});
 ```
 
 # 注意事项
-1.`开放域是不可以加载远程资源的`,子域可以调用主域中的asset文件中的资源,  文件结构`asset/Loading.png`  
+* 1.`开放域是不可以加载远程资源的`,子域可以调用主域中的asset文件中的资源,  文件结构`asset/Loading.png`  
+
+* 2.开放数据域不能调用网络、存储、文件等 API
+
 示例代码:
 ```
 namespace sub
@@ -31,3 +41,34 @@ namespace sub
     ...
 }
 ```
+
+* 3.异常`TypeError: wx.getFileSystemManager is not a function`说明开发域中未开放此接口
+```
+VM1332 WAGame.js:2 TypeError: wx.getFileSystemManager is not a function
+    at Function.<anonymous> (laya.wxmini.min.js:313)
+    at Function.get (laya.core.min.js:194)
+    at Function.i.readFile (laya.wxmini.min.js:137)
+    at e.load (laya.wxmini.min.js:542)
+    at e.n._doLoad (laya.core.min.js:5702)
+    at e.n._next (laya.core.min.js:5683)
+    at e.n.load (laya.core.min.js:5662)
+    at e.<anonymous> (laya.ui.min.js:1214)
+    at new e (subout.js:1)
+    at e.show (subout.js:1)(env: Windows,mg,1.05.2202234; lib: 2.23.1)
+```
+开放域中的代码
+```
+export class MyTestView extends Laya.Image{
+    constructor(){
+        super();
+        // this.skin = "assets/Loading.png";
+        let str:string = "data:image/png;base64,iVBORw0KGgo...";
+        this.skin= str;
+    }
+}
+```
+`wx.getFileSystemManager接口文档`  
+[https://developers.weixin.qq.com/minigame/dev/api/file/wx.getFileSystemManager.html]
+
+# 好友列表相关
+[https://developers.weixin.qq.com/minigame/dev/guide/open-ability/user-status.html#拉取在线好友列表]
