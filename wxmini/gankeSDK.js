@@ -643,6 +643,47 @@ GameWXmini.getSystemInfo = function() {
   });
   }
 
+    //分享拉起通讯录
+    GameWXmini.c_friendsChat = function(data){
+      wx.shareAppMessage({
+        title: data.title,  
+        imageUrl: data.imageUrl,  
+        query: data.query
+        // success: (res) => {  
+        // console.log("转发成功", res);  
+        // },  
+        // fail: (res) => {  
+        // console.log("转发失败", res);  
+        // } 
+      })
+    }
+  
+    //获得邀请人参数
+    GameWXmini.c_getFriendInviterCode = function(){
+      var _lauchInfo = wx.getLaunchOptionsSync();
+      return _lauchInfo.query?_lauchInfo.query.uid:"0";
+    }
+  
+    //上传一起游玩好友至开放域
+    GameWXmini.c_getFriendInviterCode = function(){
+      wx.setUserCloudStorage(
+        {
+            KVDataList:[{key:"help", value: 1 }],
+            success: (res) =>
+            {
+                console.log("success");
+            },
+            fail: (res) =>
+            {
+                console.log("fail!");
+            },
+            complete: (res) =>
+            {
+                 
+            }
+        });
+      }
+
   return GameWXmini
 })()
 
