@@ -15,16 +15,29 @@
         {
             "x":15,
             "type":"List",
-            "props":{"width":536,"var":"showlist","spaceX":4,"repeatX":5,"height":104,"hScrollBarSkin":" "},
+            "props":{"width":536,"var":"showlist","spaceX":5,"repeatX":5,"height":104,"hScrollBarSkin":" "},
             "nodeParent":1,
             "label":"List(showlist)",
             "isOpen":true,
-            "isDirectory":false,
+            "isDirectory":true,
             "isAniNode":true,
-            "hasChild":false,
+            "hasChild":true,
             "compId":2,
             "child":[
-                ]
+                {
+                    "x":30,
+                    "type":"UIView",
+                    "source":"HelpItemVIew.ui",
+                    "props":{"renderType":"render"},
+                    "nodeParent":2,
+                    "label":"UIView",
+                    "isDirectory":false,
+                    "isAniNode":false,
+                    "hasChild":false,
+                    "compId":3,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {
