@@ -31,3 +31,5 @@ let sub =  fs.readFileSync(_root+"sub.js", "utf-8");
 fs.writeFileSync(_root+"subout.js",ui+rankui+sub,"utf-8");
 process.execSync("uglifyjs bin/js/subout.js -m -o ../wxmini/src/myOpenDataContext/subout.js");
 
+//压缩CodeC.js代码
+//process.execSync("uglifyjs ../CodeC.js -m -o ../wxmini/CodeC.js").toString();
