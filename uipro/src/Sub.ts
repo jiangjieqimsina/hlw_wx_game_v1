@@ -28,6 +28,9 @@ namespace sub {
                 t  = new (<any>sub)[_cls]();
                 this.winKey[_cls] = t;
             }
+            t.x = message["pos_x"];
+            t.y = message["pos_y"];
+            t.scaleX = t.scaleY = message["scale"];
             Laya.stage.addChild(t);
         }
 
