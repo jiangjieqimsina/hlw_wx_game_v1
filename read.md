@@ -12,7 +12,10 @@ module.json
 }
 ```
 
-# 接口说明
+# API
+* tr_wx_openSub  
+  
+说明:游戏域来调用子域的接口  
 
 `tr_wx_openSub(ui="",pos_x=0,pos_y,uiScale=1.0,close_x=0,close_y=0,close_w=0,close_h=0)`
 ```
