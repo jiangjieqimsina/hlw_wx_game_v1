@@ -12,11 +12,17 @@ module.json
 }
 ```
 
-# API
-* tr_wx_openSub  
-
+# tr_wx_openSub  
 说明:游戏域(主域)来调用子域打开一个界面,或者清空子域画布。
 
+* 打开界面
+```
+//在容器app.AppContainer.zhezhaoLayer位置50,100添加组件sub.HlwRankView(); "data"为扩展数据
+
+let str= `{"x":50,"y":100,"ui":"sub.HlwRankView","data":"This is My Data"}`
+window["tr_wx_openSub"]({parent:app.AppContainer.zhezhaoLayer,json:str});
+```
+<!-- 
 `tr_wx_openSub(ui="",pos_x=0,pos_y,uiScale=1.0,close_x=0,close_y=0,close_w=0,close_h=0)`
 ```
 //打开一个开放域的界面到开发域舞台坐标0,0,关闭按钮的坐标为50,50,在舞台中的位置为100,100,界面缩放为1.2比率。  
@@ -24,10 +30,17 @@ window["tr_wx_openSub"]("sub.HlwRankView",0,0,1.2,50,50,100,100);
 
 //打开界面,坐标设置在舞台10,10位置,关闭按钮不设置坐标的和宽高时候,默认没有关闭区域,可以通过window["tr_wx_openSub"]("clearCanvas")关闭。  
 window["tr_wx_openSub"]("sub.HlwRankView",10,10);
+// 
 
-//清空界面,在使用完界面之后,移除界面的时候使用。  
-window["tr_wx_openSub"]("clearCanvas");
+``` -->
+* 清空画布和舞台  
+*在使用完界面之后,移除界面的时候使用。* 
 ```
+window["tr_wx_openSub"]("clearCanvas");
+```  
+    
+
+
 
 # 注意事项
 * 1.`开放域是不可以加载远程资源的`,子域可以调用主域中的asset文件中的资源,  文件结构`asset/Loading.png`  
