@@ -13,14 +13,17 @@ module.json
 ```
 
 # 接口说明
-```
-//打开一个开放域的界面到开发域舞台,关闭按钮的坐标为50,50,在舞台中的位置为100,100
-window["tr_wx_openSub"](50,50,100,100,"sub.HlwRankView");
 
-//获取好友列表 开放域Sub.ts中type=3类型接收列表数据
-window["tr_wx_getFriendsList"]((err)=>{
-    console.log(err)
-});
+`tr_wx_openSub(ui="",pos_x=0,pos_y,uiScale=1.0,close_x=0,close_y=0,close_w=0,close_h=0)`
+```
+//打开一个开放域的界面到开发域舞台坐标0,0,关闭按钮的坐标为50,50,在舞台中的位置为100,100,界面缩放为1.2比率。  
+window["tr_wx_openSub"]("sub.HlwRankView",0,0,1.2,50,50,100,100);
+
+//打开界面,坐标设置在舞台10,10位置,关闭按钮不设置坐标的和宽高时候,默认没有关闭区域,可以通过window["tr_wx_openSub"]("clearCanvas")关闭。  
+window["tr_wx_openSub"]("sub.HlwRankView",10,10);
+
+//清空界面,在使用完界面之后,移除界面的时候使用。  
+window["tr_wx_openSub"]("clearCanvas");
 ```
 
 # 注意事项
