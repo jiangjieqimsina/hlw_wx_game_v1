@@ -6,7 +6,7 @@ namespace sub
    export class HlwHelpView extends ui.HelpVIewUI{
         protected initialize(){
 
-            this.showlist.itemRender = Laya.Image;
+            this.showlist.itemRender = ui.HelpItemVIewUI;
             this.showlist.renderHandler = new Laya.Handler(this,this.onRenderHandler);
             this.on(Laya.Event.DISPLAY,this,this.onDisplay);
             this.on(Laya.Event.UNDISPLAY,this,this.onUnDisplay);
@@ -34,7 +34,7 @@ namespace sub
                         __list = res.data;
                     }
                     // rankView.drawAll(__list);
-                    _that.showlist.array = __list;
+                    _that.showlist.array = __list.reverse();
                 }
             });
         }
@@ -43,9 +43,9 @@ namespace sub
             // console.log("rank is onUnDisplay!");
         }
 
-        private onRenderHandler(item:Laya.Image,index:number):void{
+        private onRenderHandler(item:ui.HelpItemVIewUI,index:number):void{
             console.log(item.dataSource);
-            // item.skin = 
+            item.img.skin = item.dataSource.avatarUrl;
             // // console.log(item.dataSource);
             // item.hitArea = new Laya.Rectangle(0,0,item.width,item.height);
             // let _vo:IWeiXinFriendVO = item.dataSource;
