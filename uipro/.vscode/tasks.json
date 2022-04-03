@@ -18,5 +18,12 @@
             "problemMatcher": []
         },
 
+        {
+            "label": "编译并压缩Code",
+            "type": "shell",
+            "command": "node copyZip.js zipCode",
+            "problemMatcher": []
+        },
+
     ]
 }
