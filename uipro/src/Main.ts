@@ -5,10 +5,25 @@ namespace wxmi {
         getGameServerManager();
         setUserCloudStorage(obj);
     }
+    // obj.ui, obj.x, obj.y,obj.uiScale,obj.parent
+    /**
+     * tr_wx_openSub的参数结构体
+     */
+    interface IOpenStruct{
+        /**
+         * 组件所在显示容器
+         */
+        parent:Laya.Sprite;
+
+        /**
+         * 主域给子域的数据
+         */
+        json:string;
+    }
     /**
      * 微信主域用于绘制sharedCanvas
      */
-    export class DrawSprite extends Laya.Sprite {
+    class DrawSprite extends Laya.Sprite {
         constructor() {
             super();
             let sharedCanvas = Laya.Browser.window.sharedCanvas;
@@ -65,26 +80,49 @@ namespace wxmi {
         /**
          * 主域初始化,打开界面
          */
-        public open(_cls:string,x:number=0,y:number=0,uiScale:number):void{
+        public open(obj:IOpenStruct):void{
+            //_cls:string,x:number=0,y:number=0,uiScale:number=1.0,parent?:Laya.Sprite
             this.initStage();
-            wx.postMessage({type:1,cls:_cls,pos_x:x,pos_y:y,scale:uiScale});
+            
+            let parent = obj.parent;
+
+            //cls: obj.ui,
+            // pos_x:obj.x,pos_y:obj.y,
+            // scale:obj.uiScale,
+            // mainData:obj.mainData
+            
+
+
+            wx.postMessage({type:1,json:obj.json});
+
             if(!this.drawSprite){
                 this.drawSprite = new DrawSprite();
             }
-            Laya.stage.addChild(this.drawSprite);
+            if(parent){
+                parent.addChild(this.drawSprite);
+            }else{
+                Laya.stage.addChild(this.drawSprite);
+            }
+            // this.drawSprite.x = x;
+            // this.drawSprite.y = y;
+            // this.drawSprite.scaleX = this.drawSprite.scaleY = uiScale;
+            // parent.addChild(this.drawSprite);
         }
+
+        	//window["tr_wx_openSub"]({x:pos.x,y:pos.y,ui:"sub.HlwRankView",parent:app.AppContainer.zhezhaoLayer,data:"This is My Data"});
+			// window["tr_wx_openSub"]({parent:app.AppContainer.zhezhaoLayer,json:`{x=${pos.x},y=${pos.y}}`});
+
 
         /**
          * 初始化开放域舞台
          */
-        public initStage():void{
+        private initStage():void{
+            let sharedCanvas=Laya.Browser.window.sharedCanvas;
+            sharedCanvas.width = Laya.stage.width;
+            sharedCanvas.height = Laya.stage.height;
             if(!this.isOpen){
-                let sharedCanvas=Laya.Browser.window.sharedCanvas;
-                sharedCanvas.width = Laya.stage.width;
-                sharedCanvas.height = Laya.stage.height;
                 wx.postMessage({ type: -1, data: { width: Laya.stage.width, height: Laya.stage.height, matrix: Laya.stage._canvasTransform } });
-                    // this.isInit = true;
-                this.isOpen = true;    
+                this.isOpen = true;
             }
         }
 
@@ -92,14 +130,19 @@ namespace wxmi {
          * 清空sharedCanvas
          */
         public clear():void{
-            this.isOpen = false;
             let sharedCanvas=Laya.Browser.window.sharedCanvas;
             sharedCanvas.width = 1;
             sharedCanvas.height = 1;
+
+            // const sharedContext = sharedCanvas.getContext("2d");
+            // sharedContext.clearRect(0, 0, Laya.stage.width, Laya.stage.height);
+            //console.log(sharedCanvas);
+
             wx.postMessage({type:0});
             if(this.drawSprite){
                 this.drawSprite.removeSelf();
             }
+
         }
     }
 
@@ -128,7 +171,7 @@ namespace wxmi {
         }
     }
 
-    let maskClick = new MaskClickView();    
+    // let maskClick = new MaskClickView();    
     let main = new Main();
     
     //获取微信游戏好友
@@ -138,21 +181,29 @@ namespace wxmi {
 //     console.log(err)
 // });
     ////////////////////////////////////////////////////////
-    window["tr_wx_openSub"]=function(ui="",pos_x=0,pos_y,uiScale=1.0,close_x=0,close_y=0,close_w=0,close_h=0){
-        if(ui=="clearCanvas"){
-            maskClick.onClose();
-        }
-        else if(close_w == 0 && close_h == 0){
-            main.open(ui,pos_x,pos_y,uiScale);
+    window["tr_wx_openSub"]=function(obj:IOpenStruct){
+        // p,ui="",pos_x=0,pos_y,uiScale=1.0,close_x=0,close_y=0,close_w=0,close_h=0
+        //let o = {pos_x:0,pos_y:0,ui:"sub.HlwRankView",parent:this};
+        if (typeof obj == "string" && obj === "clearCanvas") {
+            // maskClick.onClose();
+            main.clear();
         }else{
-            maskClick.setCloseBtn(close_x,close_y,close_w,close_h);//设置关闭按钮的位置和宽高
-            Laya.stage.addChild(maskClick);
-            main.open(ui,pos_x,pos_y,uiScale);
+            // let close_w = obj.close_w || 0;
+            // let close_h = obj.close_h || 0;
+
+            main.open(obj);
+            
+            // }else{
+            //     maskClick.setCloseBtn(close_x,close_y,close_w,close_h);//设置关闭按钮的位置和宽高
+            //     Laya.stage.addChild(maskClick);
+            //     main.open(ui,pos_x,pos_y,p,uiScale);
+            // }
         }
+       
     }
 
     Laya.stage.on(Laya.Event.MOUSE_UP,window,(e)=>{
-        window["tr_wx_openSub"]("sub.HlwRankView",10,10,1.0);
+        // window["tr_wx_openSub"]("sub.HlwRankView",10,10,1.0);
         // setTimeout(() => {
         //     window["tr_wx_openSub"]("clearCanvas");
         // }, 4000);

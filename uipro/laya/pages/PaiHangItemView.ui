@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":3,
+    "selecteID":8,
     "props":{"width":400,"sceneColor":"#000000","height":150},
     "nodeParent":-1,
     "label":"View",
@@ -48,6 +48,19 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":4,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"y":9,"x":283,"width":100,"var":"yaoqing","height":50},
+            "nodeParent":1,
+            "label":"Image(yaoqing)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":8,
             "child":[
                 ]
         }],

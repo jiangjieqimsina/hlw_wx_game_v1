@@ -39,8 +39,9 @@ module ui {
 		public img:Laya.Image;
 		public rank:Laya.Label;
 		public playerName:Laya.Label;
+		public yaoqing:Laya.Image;
 
-        public static  uiView:any ={"type":"View","props":{"width":400,"height":150},"child":[{"type":"Image","props":{"y":24,"width":100,"var":"img","height":100}},{"type":"Label","props":{"y":73,"x":288,"width":80,"var":"rank","text":"label","height":12,"fontSize":32,"color":"#ffffff","align":"center"}},{"type":"Label","props":{"y":73,"x":113,"width":186,"var":"playerName","text":"label","height":12,"fontSize":32,"color":"#ffffff","align":"center"}}]};
+        public static  uiView:any ={"type":"View","props":{"width":400,"height":150},"child":[{"type":"Image","props":{"y":24,"width":100,"var":"img","height":100}},{"type":"Label","props":{"y":73,"x":288,"width":80,"var":"rank","text":"label","height":12,"fontSize":32,"color":"#ffffff","align":"center"}},{"type":"Label","props":{"y":73,"x":113,"width":186,"var":"playerName","text":"label","height":12,"fontSize":32,"color":"#ffffff","align":"center"}},{"type":"Image","props":{"y":9,"x":283,"width":100,"var":"yaoqing","height":50}}]};
         constructor(){ super()}
         createChildren():void {
         

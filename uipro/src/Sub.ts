@@ -4,11 +4,34 @@ namespace sub {
         onMessage(func);
         getFriendCloudStorage(obj);
         getGameServerManager();
+        getPotentialFriendList(obj);
     }
 
     export interface IWeiXinFriendVO{
         avatarUrl:string;
         nickname:string;
+    }
+    interface ISubOpenStruct{
+        /**
+         * ui组件名 类似"sub.HlwRankView
+         */
+        ui:string;
+        /**
+         * x坐标
+         */
+        x:number;
+        /**
+         * y坐标
+         */
+        y:number;
+        /**
+         * 组件缩放值
+         */
+        uiScale:number;
+        /**
+         * 主域给子域的数据
+         */
+        data:string;
     }
     /**
      * 子域
@@ -17,10 +40,15 @@ namespace sub {
 
         private winKey:any = {};
 
-        private isInit:boolean = false;
+        // private isInit:boolean = false;
 
-        private show(message):void{
-            let _cls: string = message["cls"].split(".")[1];
+        private show(msg):void{
+            // console.log(msg);
+
+            let obj:ISubOpenStruct = JSON.parse(msg.json);
+            
+            
+            let _cls: string = obj.ui.split(".")[1];
             let t;
             if(this.winKey[_cls]){
                 t = this.winKey[_cls];
@@ -28,9 +56,10 @@ namespace sub {
                 t  = new (<any>sub)[_cls]();
                 this.winKey[_cls] = t;
             }
-            t.x = message["pos_x"];
-            t.y = message["pos_y"];
-            t.scaleX = t.scaleY = message["scale"];
+            t.x = obj.x;
+            t.y = obj.y;
+            t.scaleX = t.scaleY = obj.uiScale || 1.0;
+            t.dataSource = obj.data;
             Laya.stage.addChild(t);
         }
 
@@ -38,25 +67,26 @@ namespace sub {
             let _that = this;
             wx.onMessage((message: Object)=>{
                 let type = message['type'];
-                console.log(new Date().getTime()/1000+" type:"+type);
-
+                console.log(new Date().getTime()/1000+ "message:" + JSON.stringify(message));
+                
                 switch (type) {
                     case -1:
                         //初始化开放域上的Laya.stage
-                        if(!_that.isInit){
+                        // if(!_that.isInit){
                             Laya.MiniAdpter.init(true, true);
                             Laya.init(message['data'].width, message['data'].height);//子域不支持WebGl模式
                             Laya.stage.bgColor = null;
-                            _that.isInit = true;
-                        }
-                        let tempMatrix: Laya.Matrix = message['data'].matrix;
-                        let matrix: Laya.Matrix = new Laya.Matrix();
-                        matrix.a = tempMatrix.a;
-                        matrix.b = tempMatrix.b;
-                        matrix.c = tempMatrix.c;
-                        matrix.d = tempMatrix.d;
-                        Laya.stage._canvasTransform = matrix;//重新设置矩阵
-                        // console.log("初始开放域舞台!!!!");
+
+                            let tempMatrix: Laya.Matrix = message['data'].matrix;
+                            let matrix: Laya.Matrix = new Laya.Matrix();
+                            matrix.a = tempMatrix.a;
+                            matrix.b = tempMatrix.b;
+                            matrix.c = tempMatrix.c;
+                            matrix.d = tempMatrix.d;
+                            Laya.stage._canvasTransform = matrix;//重新设置矩阵
+                            console.log("初始开放域舞台!!!!");
+                            // _that.isInit = true;
+                        // }
                         break;
                     case 0:
                         //清空,从舞台上移除
