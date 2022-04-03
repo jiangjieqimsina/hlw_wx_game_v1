@@ -598,7 +598,7 @@ GameWXmini.getSystemInfo = function() {
          // res.confirm === true 或 false
       },
       fail(err) {
-        console.error(err)
+        console.warn(err)
       }
     })
     wx.getWhatsNewSubscriptionsSetting({
@@ -608,7 +608,7 @@ GameWXmini.getSystemInfo = function() {
          // res.status === 1 
       },
       fail(err) {
-        console.error(err)
+        console.warn(err)
       }
     })
   }
@@ -661,14 +661,14 @@ GameWXmini.getSystemInfo = function() {
     //获得邀请人参数
     GameWXmini.c_getFriendInviterCode = function(){
       var _lauchInfo = wx.getLaunchOptionsSync();
-      return _lauchInfo.query?_lauchInfo.query.uid:"0";
+      return _lauchInfo.query?{uid: _lauchInfo.query.uid, tasktype: _lauchInfo.query.tasktype}:"0";
     }
   
     //上传一起游玩好友至开放域
-    GameWXmini.c_getFriendInviterCode = function(){
+    GameWXmini.c_setFriendList = function(){
       wx.setUserCloudStorage(
         {
-            KVDataList:[{key:"help", value: 1 }],
+            KVDataList:[{key:"help", value: "1" }],
             success: (res) =>
             {
                 console.log("success");
