@@ -5,7 +5,6 @@ namespace wxmi {
         getGameServerManager();
         setUserCloudStorage(obj);
     }
-    // obj.ui, obj.x, obj.y,obj.uiScale,obj.parent
     /**
      * tr_wx_openSub的参数结构体
      */
@@ -18,7 +17,10 @@ namespace wxmi {
         /**
          * 主域给子域的数据
          */
-        json:string;
+        x:number;
+        y:number;
+        ui:string;
+        data:string;
     }
     /**
      * 微信主域用于绘制sharedCanvas
@@ -83,17 +85,9 @@ namespace wxmi {
         public open(obj:IOpenStruct):void{
             //_cls:string,x:number=0,y:number=0,uiScale:number=1.0,parent?:Laya.Sprite
             this.initStage();
-            
             let parent = obj.parent;
-
-            //cls: obj.ui,
-            // pos_x:obj.x,pos_y:obj.y,
-            // scale:obj.uiScale,
-            // mainData:obj.mainData
-            
-
-
-            wx.postMessage({type:1,json:obj.json});
+            obj.parent = null;
+            wx.postMessage({type:1,expandData:obj});
 
             if(!this.drawSprite){
                 this.drawSprite = new DrawSprite();
@@ -108,10 +102,6 @@ namespace wxmi {
             // this.drawSprite.scaleX = this.drawSprite.scaleY = uiScale;
             // parent.addChild(this.drawSprite);
         }
-
-        	//window["tr_wx_openSub"]({x:pos.x,y:pos.y,ui:"sub.HlwRankView",parent:app.AppContainer.zhezhaoLayer,data:"This is My Data"});
-			// window["tr_wx_openSub"]({parent:app.AppContainer.zhezhaoLayer,json:`{x=${pos.x},y=${pos.y}}`});
-
 
         /**
          * 初始化开放域舞台
@@ -202,7 +192,7 @@ namespace wxmi {
        
     }
 
-    Laya.stage.on(Laya.Event.MOUSE_UP,window,(e)=>{
+    // Laya.stage.on(Laya.Event.MOUSE_UP,window,(e)=>{
         // window["tr_wx_openSub"]("sub.HlwRankView",10,10,1.0);
         // setTimeout(() => {
         //     window["tr_wx_openSub"]("clearCanvas");
@@ -256,10 +246,5 @@ namespace wxmi {
             */
 
 
-    });
-
-    
+    // });
 }
-
-
-

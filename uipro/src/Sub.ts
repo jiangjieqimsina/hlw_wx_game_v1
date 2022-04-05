@@ -45,8 +45,7 @@ namespace sub {
         private show(msg):void{
             // console.log(msg);
 
-            let obj:ISubOpenStruct = JSON.parse(msg.json);
-            
+            let obj:ISubOpenStruct = msg.expandData;
             
             let _cls: string = obj.ui.split(".")[1];
             let t;
@@ -129,4 +128,3 @@ namespace sub {
     //初始化子域
     new Sub();
 }
-
