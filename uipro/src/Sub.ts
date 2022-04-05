@@ -4,12 +4,21 @@ namespace sub {
         onMessage(func);
         getFriendCloudStorage(obj);
         getGameServerManager();
+        /**
+         * 获取未玩过该游戏的好友列表
+         */
         getPotentialFriendList(obj);
+
+        /**
+         * 分享给好友
+         */
+        shareMessageToFriend(obj);
     }
 
     export interface IWeiXinFriendVO{
         avatarUrl:string;
         nickname:string;
+        openid:string;
     }
     interface ISubOpenStruct{
         /**

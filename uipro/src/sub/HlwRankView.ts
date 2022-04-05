@@ -19,34 +19,124 @@ namespace sub {
         protected initialize(){
             // this.yaoqing.on
             super.initialize();
-            this.yaoqing.hitArea = new Laya.Rectangle(0, 0, this.yaoqing.width, this.yaoqing.height);
-                // console.log(item.dataSource);
-            // });
+            //this.yaoqing.hitArea = new Laya.Rectangle(0, 0, this.yaoqing.width, this.yaoqing.height);
 
-            this.graphics.drawRect(0,0,this.width,this.height,null,"#00ff00",2);
-            this.on(Laya.Event.DISPLAY,this,this.onDisplay);
+            // this.graphics.drawRect(0,0,this.width,this.height,null,"#00ff00",2);
+            // this.on(Laya.Event.DISPLAY,this,this.onDisplay);
+
+            //this.yaoqing.skin = "";
+        }
+
+        // private onDisplay():void{
+        //     this.yaoqing.on(Laya.Event.CLICK, this,this.onClick);
+        //     console.log(1);
+        // }
+
+        // private onClick():void{
+        //     console.log(this.dataSource);
+        // }
+    }
+
+    /**
+     * 邀请列表
+     */
+    class PaiHangYaoQingitem extends ui.PaiHangItemViewUI{
+        private curData:IWeiXinFriendVO;
+        protected initialize(){
+            super.initialize();
+            this.hitArea = new Laya.Rectangle(0, 0, this.width, this.height);
+            // this.yaoqing.label = "邀请";
+            this.yaoqing.hitArea = new Laya.Rectangle(0, 0, this.yaoqing.width, this.yaoqing.height);
+            this.yaoqing.on(Laya.Event.CLICK,this,this.onYaoQing);
+            this.yaoqing.skin="assets/btn.png";
+        }
+
+        private onYaoQing():void{
+            wx.shareMessageToFriend({
+                openId  : this.curData.openid, // 这里填写好友的openid
+                title   : '葫芦娃',
+                // imageUrl: 'https://mmocgame.qpic.cn/wechatgame/TKicR7oWel4znvwMdwOpuwoy1ntVB44kT9ZSse2u0xNcO5SaxIS2UwU0GdUfA2Al0/0'
+            })
+            //console.log(this.curData);
+        }
+
+        public setData(data):void{
+            let _vo: IWeiXinFriendVO = data;
+            this.curData = data;
+            // this.yaoqing.skin = "";
+            // let _vo: IWeiXinFriendVO = item.dataSource;
+            this.img.skin = _vo.avatarUrl;
+            this.playerName.color = "#ffffff";
+            this.playerName.text = _vo.nickname;
+        }
+    }
+
+    class PaiHangYaoQing extends ui.PaiHangYaoQingViewUI
+    {
+        protected initialize(){
+            super.initialize();
+            this.plist.itemRender = PaiHangYaoQingitem;
+            this.plist.renderHandler = new Laya.Handler(this, this.onRenderHandler);
+            this.on(Laya.Event.DISPLAY, this, this.onDisplay);
+            this.graphics.drawRect(0,0,this.width,this.height,"#000000");
+        }
+        private onRenderHandler(item:PaiHangYaoQingitem):void{
+            item.setData(item.dataSource);
         }
 
         private onDisplay():void{
-            this.yaoqing.on(Laya.Event.CLICK, this,this.onClick);
-            console.log(1);
-        }
-
-        private onClick():void{
-            console.log(this.dataSource);
+            this.x = (Laya.stage.width - this.width)/2;
+            this.y = (Laya.stage.height - this.height)/2;
+            let _that = this;
+            _that.plist.array = [];
+            _that.plist.scrollTo(0);
+            wx.getPotentialFriendList({
+                success: (res) => {
+                    let __list = res.list || [];
+                    //console.log('getPotentialFriendList', res);
+                    _that.plist.array = __list;
+                }
+            });
+            
         }
     }
+
 
     /**
      * 排行榜
      */
     export class HlwRankView extends ui.PaiHangVIewUI {
+        private yaoqinView:PaiHangYaoQing;
+        private maskV:Laya.Sprite = new Laya.Sprite;;
+
         protected initialize() {
             this.showlist.itemRender = RankItem;
             this.showlist.renderHandler = new Laya.Handler(this, this.onRenderHandler);
             this.on(Laya.Event.DISPLAY, this, this.onDisplay);
             this.on(Laya.Event.UNDISPLAY, this, this.onUnDisplay);
+
+            //Test
             this.graphics.drawRect(0, 0, this.width, this.height, null, "#ff0000", 1);
+            this.yaoqing.graphics.drawRect(0,0,this.yaoqing.width,this.yaoqing.height,"#ff0000");
+            this.yaoqing.hitArea = new Laya.Rectangle(0,0,this.yaoqing.width,this.yaoqing.height);
+            this.yaoqing.on(Laya.Event.CLICK,this,this.onYaoQingHandler);
+        }
+
+        private onMaskClick():void{
+            if(this.yaoqinView){
+                this.yaoqinView.removeSelf();
+            }
+            this.maskV.removeSelf();
+        }
+        private onYaoQingHandler():void{
+            this.maskV.hitArea = new Laya.Rectangle(0,0,Laya.stage.width,Laya.stage.height);
+            this.maskV.on(Laya.Event.CLICK,this,this.onMaskClick);
+            Laya.stage.addChild(this.maskV);
+            // console.log("yaoqing!!!");
+            if(!this.yaoqinView){
+                this.yaoqinView = new PaiHangYaoQing();
+            }
+            Laya.stage.addChild(this.yaoqinView)
         }
 
 
@@ -75,35 +165,30 @@ namespace sub {
             // this.x = (Laya.stage.width - this.width)/2;
             // this.y = (Laya.stage.height - this.height)/2;
             let _that = this;
+            // console.log('this is dataSource:[' + this.dataSource + "]");
 
-            console.log('this is dataSource:[' + this.dataSource + "]");
-
-            // this.refreshFriend();
-            _that.showlist.array = [];
-            _that.showlist.scrollTo(0);
-            wx.getPotentialFriendList({
-                success: (res) => {
-                    let __list = res.list || [];
-                    //console.log('getPotentialFriendList', res);
-                    _that.showlist.array = __list;
-                }
-            });
+            this.refreshFriend();
+            
         }
-
 
         private onUnDisplay(): void {
             // console.log("rank is onUnDisplay!");
+            if(this.yaoqinView){
+                this.yaoqinView.removeSelf();
+            }
         }
         // private onYaoQing(o):void{
         //     console.log(o);
         // }
         private onRenderHandler(item: RankItem, index: number): void {
             // console.log(item.dataSource);
-            item.yaoqing.skin = "assets/btn.png";
+            //item.yaoqing.skin = "assets/btn.png";
+            // item.yaoqing.skin = "";
+            item.yaoqing.visible = false;
             item.hitArea = new Laya.Rectangle(0, 0, item.width, item.height);
             let _vo: IWeiXinFriendVO = item.dataSource;
             item.img.skin = _vo.avatarUrl;
-            item.playerName.color = "#ff0000";
+            item.playerName.color = "#000000";
             item.playerName.text = _vo.nickname;
         }
     }

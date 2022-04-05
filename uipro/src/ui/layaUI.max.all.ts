@@ -37,11 +37,10 @@ module ui {
 module ui {
     export class PaiHangItemViewUI extends View {
 		public img:Laya.Image;
-		public rank:Laya.Label;
 		public playerName:Laya.Label;
 		public yaoqing:Laya.Image;
 
-        public static  uiView:any ={"type":"View","props":{"width":400,"height":150},"child":[{"type":"Image","props":{"y":24,"width":100,"var":"img","height":100}},{"type":"Label","props":{"y":73,"x":288,"width":80,"var":"rank","text":"label","height":12,"fontSize":32,"color":"#ffffff","align":"center"}},{"type":"Label","props":{"y":73,"x":113,"width":186,"var":"playerName","text":"label","height":12,"fontSize":32,"color":"#ffffff","align":"center"}},{"type":"Image","props":{"y":9,"x":283,"width":100,"var":"yaoqing","height":50}}]};
+        public static  uiView:any ={"type":"View","props":{"width":598,"height":120},"child":[{"type":"Image","props":{"y":10,"width":100,"var":"img","height":100}},{"type":"Label","props":{"y":42,"x":102,"width":362,"var":"playerName","text":"label","height":40,"fontSize":32,"color":"#ffffff","align":"left"}},{"type":"Image","props":{"y":38,"x":481,"width":100,"var":"yaoqing","height":50}}]};
         constructor(){ super()}
         createChildren():void {
         
@@ -56,14 +55,32 @@ module ui {
 module ui {
     export class PaiHangVIewUI extends View {
 		public showlist:Laya.List;
+		public yaoqing:Laya.Sprite;
 
-        public static  uiView:any ={"type":"View","props":{"width":400,"height":200},"child":[{"type":"List","props":{"width":400,"var":"showlist","vScrollBarSkin":" ","height":200},"child":[{"type":"PaiHangItemView","props":{"renderType":"render","runtime":"ui.PaiHangItemViewUI"}}]}]};
+        public static  uiView:any ={"type":"View","props":{"width":648,"height":1042},"child":[{"type":"List","props":{"y":25,"x":25,"width":598,"var":"showlist","vScrollBarSkin":" ","height":900},"child":[{"type":"PaiHangItemView","props":{"renderType":"render","runtime":"ui.PaiHangItemViewUI"}}]},{"type":"Sprite","props":{"y":945,"x":104,"width":164,"var":"yaoqing","height":57}}]};
         constructor(){ super()}
         createChildren():void {
         			View.regComponent("ui.PaiHangItemViewUI",ui.PaiHangItemViewUI);
 
             super.createChildren();
             this.createView(ui.PaiHangVIewUI.uiView);
+
+        }
+
+    }
+}
+
+module ui {
+    export class PaiHangYaoQingViewUI extends View {
+		public plist:Laya.List;
+
+        public static  uiView:any ={"type":"View","props":{"width":598,"height":600},"child":[{"type":"List","props":{"width":598,"var":"plist","vScrollBarSkin":" ","height":600},"child":[{"type":"PaiHangItemView","props":{"renderType":"render","runtime":"ui.PaiHangItemViewUI"}}]}]};
+        constructor(){ super()}
+        createChildren():void {
+        			View.regComponent("ui.PaiHangItemViewUI",ui.PaiHangItemViewUI);
+
+            super.createChildren();
+            this.createView(ui.PaiHangYaoQingViewUI.uiView);
 
         }
 
