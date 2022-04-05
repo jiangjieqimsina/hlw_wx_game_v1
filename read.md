@@ -17,10 +17,26 @@ module.json
 
 * 打开界面
 ```
-//在容器app.AppContainer.zhezhaoLayer位置50,100添加组件sub.HlwRankView(); "data"为扩展数据
-
-let str= `{"x":50,"y":100,"ui":"sub.HlwRankView","data":"This is My Data"}`
-window["tr_wx_openSub"]({parent:app.AppContainer.zhezhaoLayer,json:str});
+//在容器app.AppContainer.zhezhaoLayer添加组件sub.HlwRankView(); "data"为扩展数据
+var pos = this.panelgonggao.parent.localToGlobal(new Laya.Point(this.panelgonggao.x,this.panelgonggao.y));
+var obj = {
+    x:pos.x,
+    y:pos.y,
+    ui:"sub.HlwRankView",
+    data:"This is My Data",
+    parent:app.AppContainer.zhezhaoLayer
+}
+window["tr_wx_openSub"](obj);
+```
+在sub.HlwRankView.ts使用扩展数据
+```
+...
+private onDisplay(): void {
+    this.callLater(this.onMyCallter);
+}
+private onMyCallter(): void {
+    console.log('this is dataSource:[' + this.dataSource + "]");
+}
 ```
 <!-- 
 `tr_wx_openSub(ui="",pos_x=0,pos_y,uiScale=1.0,close_x=0,close_y=0,close_w=0,close_h=0)`
