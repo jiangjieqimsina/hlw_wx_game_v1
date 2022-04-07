@@ -19,6 +19,7 @@ namespace sub {
         avatarUrl:string;
         nickname:string;
         openid:string;
+        KVDataList:any[];
     }
     interface ISubOpenStruct{
         /**

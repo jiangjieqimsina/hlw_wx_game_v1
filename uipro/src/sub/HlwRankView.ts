@@ -1,4 +1,7 @@
 namespace sub {
+    let drawRect:boolean = false;//用于绘制测试边框
+
+/*
     export class MyTestView extends Laya.Image {
         constructor() {
             super();
@@ -14,33 +17,73 @@ namespace sub {
             });
         }
     }
+*/
+
+    /**
+     * 获取Key Value
+     */
+    function getValueByKey(_vo: IWeiXinFriendVO,key:string): number {
+        if (_vo && _vo.KVDataList) {
+            for (let i = 0; i < _vo.KVDataList.length; i++) {
+                let obj = _vo.KVDataList[i];
+                if (obj["key"] == key) {
+                    return parseInt(obj["value"]);
+                }
+            }
+        }
+        return 0;
+    }
+    /**
+     * 战斗力
+     */
+    function getScore(_vo: IWeiXinFriendVO){
+        return getValueByKey(_vo,"score");
+    }
+
+    function sortHandler(a:IWeiXinFriendVO,b:IWeiXinFriendVO):number{
+        let a1 = getScore(a);
+        let b1 = getScore(b);
+        if(a1 > b1){
+            return -1;
+        }
+        else if(a1 < b1){
+            return 1;
+        }
+        return 0;
+    }
+
 
     class RankItem extends ui.PaiHangItemViewUI{
+        private _vo:IWeiXinFriendVO;
         protected initialize(){
-            // this.yaoqing.on
             super.initialize();
-            //this.yaoqing.hitArea = new Laya.Rectangle(0, 0, this.yaoqing.width, this.yaoqing.height);
-
-            // this.graphics.drawRect(0,0,this.width,this.height,null,"#00ff00",2);
-            // this.on(Laya.Event.DISPLAY,this,this.onDisplay);
-
-            //this.yaoqing.skin = "";
         }
 
-        // private onDisplay():void{
-        //     this.yaoqing.on(Laya.Event.CLICK, this,this.onClick);
-        //     console.log(1);
-        // }
-
-        // private onClick():void{
-        //     console.log(this.dataSource);
-        // }
+        public setData(vo:IWeiXinFriendVO,index:number):void{
+            this._vo = vo;
+            this.yaoqing.visible = false;
+            this.hitArea = new Laya.Rectangle(0, 0, this.width, this.height);
+            let _vo: IWeiXinFriendVO = vo;
+            this.img.skin = _vo.avatarUrl;
+            if (index <= 2) {
+                this.rankLabel.text = "";
+                this.paimingImg.skin = `assets/bg_paiming_${index + 1}.png`;
+            } else {
+                this.rankLabel.text = (index+1).toString();
+                this.paimingImg.skin = "";
+            }
+            // item.playerName.color = "#000000";
+            this.playerName.text = _vo.nickname;
+            this.plus.text = getScore(this._vo).toString();
+        
+            
+        }
     }
 
     /**
      * 邀请列表
      */
-    class PaiHangYaoQingitem extends ui.PaiHangItemViewUI{
+    class PaiHangYaoQingitem extends ui.YaoQingItemViewUI{
         private curData:IWeiXinFriendVO;
         protected initialize(){
             super.initialize();
@@ -48,7 +91,7 @@ namespace sub {
             // this.yaoqing.label = "邀请";
             this.yaoqing.hitArea = new Laya.Rectangle(0, 0, this.yaoqing.width, this.yaoqing.height);
             this.yaoqing.on(Laya.Event.CLICK,this,this.onYaoQing);
-            this.yaoqing.skin="assets/btn.png";
+            // this.yaoqing.skin="assets/btn.png";
         }
 
         private onYaoQing():void{
@@ -66,7 +109,7 @@ namespace sub {
             // this.yaoqing.skin = "";
             // let _vo: IWeiXinFriendVO = item.dataSource;
             this.img.skin = _vo.avatarUrl;
-            this.playerName.color = "#ffffff";
+            // this.playerName.color = "#ffffff";
             this.playerName.text = _vo.nickname;
         }
     }
@@ -78,7 +121,7 @@ namespace sub {
             this.plist.itemRender = PaiHangYaoQingitem;
             this.plist.renderHandler = new Laya.Handler(this, this.onRenderHandler);
             this.on(Laya.Event.DISPLAY, this, this.onDisplay);
-            this.graphics.drawRect(0,0,this.width,this.height,"#000000");
+            this.graphics.drawRect(0,0,this.width,this.height,"#ffffff");
         }
         private onRenderHandler(item:PaiHangYaoQingitem):void{
             item.setData(item.dataSource);
@@ -101,7 +144,6 @@ namespace sub {
         }
     }
 
-
     /**
      * 排行榜
      */
@@ -112,12 +154,14 @@ namespace sub {
         protected initialize() {
             this.showlist.itemRender = RankItem;
             this.showlist.renderHandler = new Laya.Handler(this, this.onRenderHandler);
+            this.showlist.array = [];
             this.on(Laya.Event.DISPLAY, this, this.onDisplay);
             this.on(Laya.Event.UNDISPLAY, this, this.onUnDisplay);
 
-            //Test
-            this.graphics.drawRect(0, 0, this.width, this.height, null, "#ff0000", 1);
-            this.yaoqing.graphics.drawRect(0,0,this.yaoqing.width,this.yaoqing.height,"#ff0000");
+            if(drawRect){
+                this.graphics.drawRect(0, 0, this.width, this.height, null, "#ff0000", 1);
+                this.yaoqing.graphics.drawRect(0,0,this.yaoqing.width,this.yaoqing.height,"#ff0000");
+            }
             this.yaoqing.hitArea = new Laya.Rectangle(0,0,this.yaoqing.width,this.yaoqing.height);
             this.yaoqing.on(Laya.Event.CLICK,this,this.onYaoQingHandler);
         }
@@ -139,7 +183,6 @@ namespace sub {
             Laya.stage.addChild(this.yaoqinView)
         }
 
-
         private refreshFriend(): void {
             //获取好友列表数据
             let _that = this;
@@ -150,6 +193,7 @@ namespace sub {
                     let __list = [];
                     if (res.data && res.data.length > 0) {
                         __list = res.data;
+                        __list=__list.sort(sortHandler);
                     }
                     _that.showlist.array = __list;
                 }
@@ -184,12 +228,7 @@ namespace sub {
             // console.log(item.dataSource);
             //item.yaoqing.skin = "assets/btn.png";
             // item.yaoqing.skin = "";
-            item.yaoqing.visible = false;
-            item.hitArea = new Laya.Rectangle(0, 0, item.width, item.height);
-            let _vo: IWeiXinFriendVO = item.dataSource;
-            item.img.skin = _vo.avatarUrl;
-            item.playerName.color = "#000000";
-            item.playerName.text = _vo.nickname;
+            item.setData(item.dataSource,index);
         }
     }
 }

@@ -86,7 +86,7 @@ namespace wxmi {
             //_cls:string,x:number=0,y:number=0,uiScale:number=1.0,parent?:Laya.Sprite
             this.initStage();
             let parent = obj.parent;
-            obj.parent = null;
+            obj.parent = undefined;
             wx.postMessage({type:1,expandData:obj});
 
             if(!this.drawSprite){

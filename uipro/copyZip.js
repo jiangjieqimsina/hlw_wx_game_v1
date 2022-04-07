@@ -40,9 +40,11 @@ child_process.execSync("uglifyjs bin/js/subout.js -m -o ../wxmini/src/myOpenData
 
 for(let i = 0;i <  process.argv.length ;i++){
     if(process.argv[i]=="zipCode"){
-        child_process.execSync("uglifyjs ../CodeA.js -m -o ../wxmini/CodeA.js");
-        child_process.execSync("uglifyjs ../CodeB.js -m -o ../wxmini/CodeB.js");
-        child_process.execSync("uglifyjs ../CodeC.js -m -o ../wxmini/CodeC.js");
+        console.log(
+        (child_process.execSync("uglifyjs ../CodeA.js -m -o ../wxmini/CodeA.js")+
+        child_process.execSync("uglifyjs ../CodeB.js -m -o ../wxmini/CodeB.js")+
+        child_process.execSync("uglifyjs ../CodeC.js -m -o ../wxmini/CodeC.js")).toString()
+        );
     }
 }
 console.log(`${(new Date().getTime() -time) / 1000} s`);

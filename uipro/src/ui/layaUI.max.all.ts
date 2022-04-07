@@ -36,11 +36,15 @@ module ui {
 
 module ui {
     export class PaiHangItemViewUI extends View {
+		public bg:Laya.Image;
 		public img:Laya.Image;
 		public playerName:Laya.Label;
 		public yaoqing:Laya.Image;
+		public plus:Laya.Label;
+		public paimingImg:Laya.Image;
+		public rankLabel:Laya.Label;
 
-        public static  uiView:any ={"type":"View","props":{"width":598,"height":120},"child":[{"type":"Image","props":{"y":10,"width":100,"var":"img","height":100}},{"type":"Label","props":{"y":42,"x":102,"width":362,"var":"playerName","text":"label","height":40,"fontSize":32,"color":"#ffffff","align":"left"}},{"type":"Image","props":{"y":38,"x":481,"width":100,"var":"yaoqing","height":50}}]};
+        public static  uiView:any ={"type":"View","props":{"width":598,"height":120},"child":[{"type":"Image","props":{"width":598,"var":"bg","skin":"assets/bg_jiugong_04new.png","sizeGrid":"29,24,30,27","height":120}},{"type":"Image","props":{"y":15,"x":116,"width":90,"var":"img","height":90}},{"type":"Label","props":{"y":28,"x":235,"width":200,"var":"playerName","text":"label","height":22,"fontSize":22,"color":"#567474","align":"left"}},{"type":"Image","props":{"y":38,"x":481,"width":100,"var":"yaoqing","height":50}},{"type":"Label","props":{"y":68,"x":235,"width":200,"var":"plus","text":"label","height":22,"fontSize":22,"color":"#567474","align":"left"}},{"type":"Image","props":{"y":33,"x":40,"width":47,"var":"paimingImg","height":53}},{"type":"Label","props":{"y":46,"x":16,"width":100,"var":"rankLabel","text":"label","height":22,"fontSize":28,"color":"#567474","align":"center"}}]};
         constructor(){ super()}
         createChildren():void {
         
@@ -81,6 +85,26 @@ module ui {
 
             super.createChildren();
             this.createView(ui.PaiHangYaoQingViewUI.uiView);
+
+        }
+
+    }
+}
+
+module ui {
+    export class YaoQingItemViewUI extends View {
+		public bg:Laya.Image;
+		public img:Laya.Image;
+		public playerName:Laya.Label;
+		public yaoqing:Laya.Image;
+		public plus:Laya.Label;
+
+        public static  uiView:any ={"type":"View","props":{"width":598,"height":120},"child":[{"type":"Image","props":{"width":598,"var":"bg","skin":"assets/bg_jiugong_04new.png","sizeGrid":"29,24,30,27","height":120}},{"type":"Image","props":{"y":15,"x":24,"width":90,"var":"img","height":90}},{"type":"Label","props":{"y":49,"x":143,"width":248,"var":"playerName","text":"label","height":22,"fontSize":22,"color":"#567474","align":"left"}},{"type":"Image","props":{"y":35,"x":401,"width":164,"var":"yaoqing","skin":"assets/btn.png","height":57}},{"type":"Label","props":{"y":52,"x":401,"width":164,"var":"plus","text":"邀请","height":22,"fontSize":26,"color":"#d3762e","align":"center"}}]};
+        constructor(){ super()}
+        createChildren():void {
+        
+            super.createChildren();
+            this.createView(ui.YaoQingItemViewUI.uiView);
 
         }
 
