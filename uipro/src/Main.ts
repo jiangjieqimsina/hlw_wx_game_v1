@@ -192,6 +192,10 @@ namespace wxmi {
        
     }
 
+    window["tr_wx_ui"]=function(uistr:string,v:boolean){
+        wx.postMessage({type:4,ui:uistr,vis:v});
+    }
+
     // Laya.stage.on(Laya.Event.MOUSE_UP,window,(e)=>{
         // window["tr_wx_openSub"]("sub.HlwRankView",10,10,1.0);
         // setTimeout(() => {

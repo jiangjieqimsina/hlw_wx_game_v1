@@ -130,6 +130,19 @@ namespace sub {
                             }
                         });
                         break;
+
+                    case 4:
+                        let ui = message["ui"];
+                        ui = ui.split(".")[1];
+                        if(this.winKey[ui]){
+                            let spr:Laya.Sprite = (this.winKey[ui] as Laya.Sprite)
+                            if(message["vis"] == true){
+                               Laya.stage.addChild(spr);
+                            }else{
+                                spr.removeSelf();
+                            }
+                        }
+                        break;
                 }
             });
         }

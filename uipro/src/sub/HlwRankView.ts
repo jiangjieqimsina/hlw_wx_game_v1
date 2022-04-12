@@ -22,22 +22,28 @@ namespace sub {
     /**
      * 获取Key Value
      */
-    function getValueByKey(_vo: IWeiXinFriendVO,key:string): number {
+    function getValueByKey(_vo: IWeiXinFriendVO,key:string): string {
         if (_vo && _vo.KVDataList) {
             for (let i = 0; i < _vo.KVDataList.length; i++) {
                 let obj = _vo.KVDataList[i];
                 if (obj["key"] == key) {
-                    return parseInt(obj["value"]);
+                    return obj["value"];
                 }
             }
         }
-        return 0;
+        return "";
     }
     /**
      * 战斗力
      */
     function getScore(_vo: IWeiXinFriendVO){
         return getValueByKey(_vo,"score");
+    }
+    /**
+     * 微信玩家的游戏名
+     */
+    function getPlayerName(_vo:IWeiXinFriendVO):string{
+        return getValueByKey(_vo,"playerName");
     }
 
     function sortHandler(a:IWeiXinFriendVO,b:IWeiXinFriendVO):number{
@@ -73,10 +79,8 @@ namespace sub {
                 this.paimingImg.skin = "";
             }
             // item.playerName.color = "#000000";
-            this.playerName.text = _vo.nickname;
+            this.playerName.text = getPlayerName(this._vo); //_vo.nickname;
             this.plus.text = getScore(this._vo).toString();
-        
-            
         }
     }
 
@@ -114,7 +118,7 @@ namespace sub {
         }
     }
 
-    class PaiHangYaoQing extends ui.PaiHangYaoQingViewUI
+    export class PaiHangYaoQing extends ui.PaiHangYaoQingViewUI
     {
         protected initialize(){
             super.initialize();
@@ -148,7 +152,7 @@ namespace sub {
      * 排行榜
      */
     export class HlwRankView extends ui.PaiHangVIewUI {
-        private yaoqinView:PaiHangYaoQing;
+        // private yaoqinView:PaiHangYaoQing;
         private maskV:Laya.Sprite = new Laya.Sprite;;
 
         protected initialize() {
@@ -167,27 +171,27 @@ namespace sub {
         }
 
         private onMaskClick():void{
-            if(this.yaoqinView){
-                this.yaoqinView.removeSelf();
-            }
+            // if(this.yaoqinView){
+                // this.yaoqinView.removeSelf();
+            // }
             this.maskV.removeSelf();
         }
         private onYaoQingHandler():void{
-            this.maskV.hitArea = new Laya.Rectangle(0,0,Laya.stage.width,Laya.stage.height);
-            this.maskV.on(Laya.Event.CLICK,this,this.onMaskClick);
-            Laya.stage.addChild(this.maskV);
-            // console.log("yaoqing!!!");
-            if(!this.yaoqinView){
-                this.yaoqinView = new PaiHangYaoQing();
-            }
-            Laya.stage.addChild(this.yaoqinView)
+            // this.maskV.hitArea = new Laya.Rectangle(0,0,Laya.stage.width,Laya.stage.height);
+            // this.maskV.on(Laya.Event.CLICK,this,this.onMaskClick);
+            // Laya.stage.addChild(this.maskV);
+            // // console.log("yaoqing!!!");
+            // if(!this.yaoqinView){
+            //     this.yaoqinView = new PaiHangYaoQing();
+            // }
+            // Laya.stage.addChild(this.yaoqinView)
         }
 
         private refreshFriend(): void {
             //获取好友列表数据
             let _that = this;
             wx.getFriendCloudStorage({
-                keyList: ['score'],
+                keyList: ['score','playerName'],
                 success: function (res) {
                     console.log(res);//拉取到数据
                     let __list = [];
@@ -217,9 +221,9 @@ namespace sub {
 
         private onUnDisplay(): void {
             // console.log("rank is onUnDisplay!");
-            if(this.yaoqinView){
-                this.yaoqinView.removeSelf();
-            }
+            // if(this.yaoqinView){
+            //     this.yaoqinView.removeSelf();
+            // }
         }
         // private onYaoQing(o):void{
         //     console.log(o);
