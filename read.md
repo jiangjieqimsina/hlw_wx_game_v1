@@ -55,7 +55,10 @@ window["tr_wx_openSub"]("sub.HlwRankView",10,10);
 window["tr_wx_openSub"]("clearCanvas");
 ```  
     
-
+# tr_wx_ui
+显示(隐藏)在开放域舞台  
+`window["tr_wx_ui"]("sub.HlwRankView",true);`  
+`window["tr_wx_ui"]("sub.HlwRankView",false);`
 
 
 # 注意事项
