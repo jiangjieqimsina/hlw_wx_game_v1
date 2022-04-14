@@ -21,6 +21,34 @@ namespace sub {
         openid:string;
         KVDataList:any[];
     }
+
+    enum EMessaageType{
+        /**
+         * 子域静态配置
+         */
+        GetData= -2,
+    
+        /**
+         * 舞台初始化
+         */
+        Init = -1,
+
+        /**
+         * 清理画布
+         */
+        Clear = 0,
+
+        /**
+         * 添加到舞台
+         */
+        Show = 1,
+
+        /**
+         * 指定某个界面显隐
+         */
+        UI_VIS = 4,
+    }
+
     interface ISubOpenStruct{
         /**
          * ui组件名 类似"sub.HlwRankView
@@ -79,7 +107,11 @@ namespace sub {
                 console.log(new Date().getTime()/1000+ "message:" + JSON.stringify(message));
                 
                 switch (type) {
-                    case -1:
+                    case EMessaageType.GetData:
+                        console.log(JSON.parse(message["gameconfig"]));
+                        break;
+
+                    case EMessaageType.Init:
                         //初始化开放域上的Laya.stage
                         // if(!_that.isInit){
                             Laya.MiniAdpter.init(true, true);
@@ -97,14 +129,14 @@ namespace sub {
                             // _that.isInit = true;
                         // }
                         break;
-                    case 0:
+                    case EMessaageType.Clear:
                         //清空,从舞台上移除
                         for (let key in _that.winKey) {
                             let _cc = _that.winKey[key];
                             _cc.removeSelf();
                         }
                         break;
-                    case 1:
+                    case EMessaageType.Show:
                         //在开放域舞台触发一个动作，绘制界面或者业务其他
                         _that.show(message);
                         break;
@@ -131,7 +163,7 @@ namespace sub {
                         });
                         break;
 
-                    case 4:
+                    case EMessaageType.UI_VIS:
                         let ui = message["ui"];
                         ui = ui.split(".")[1];
                         if(this.winKey[ui]){
