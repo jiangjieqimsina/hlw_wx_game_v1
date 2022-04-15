@@ -1,9 +1,14 @@
 # 说明
 Main.ts主域启动入口  
+> 主域的逻辑全在Main.ts接口内，所以的游戏域的扩展都可以在Main.ts实现
+
 Sub.ts开放域启动入口
 
 # 添加需要的模块路径
-module.json  
+ 
+> 所有子域代码的路径,和游戏域是分离的,下列配置相当于将sub/HlwRankView.js合并到sub.js模块中.
+
+文件module.json配置 
 ```
 {
     "path":[
@@ -11,6 +16,7 @@ module.json
     ]
 }
 ```
+
 
 # tr_wx_openSub  
 说明:游戏域(主域)来调用子域打开一个界面,或者清空子域画布。
