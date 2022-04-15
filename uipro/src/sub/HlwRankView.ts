@@ -1,6 +1,34 @@
 namespace sub {
     let drawRect:boolean = false;//用于绘制测试边框
 
+    interface IRandomShare{
+        title:string;
+        url:string;
+    }
+    /**
+     * 获取随机的一个分享数据接口
+     */
+    export function game_share(_openid:string):void{
+        // return gameData.randomShare[ Math.floor(Math.random()*gameData.randomShare.length)];
+        let _l1 = gameData.randomShare;
+        let _title = "";
+        let _imageUrl="";
+        if(_l1){
+            let obj:IRandomShare=_l1[ Math.floor(Math.random()*_l1.length)];
+            _title = obj.title;
+            _imageUrl = obj.url;
+        }
+        // console.log(getRandomShare());
+
+        wx.shareMessageToFriend({
+            openId  :   _openid,// this.curData.openid, // 这里填写好友的openid
+            title   : _title,
+            imageUrl:_imageUrl
+            //注意:不使用imgageUrl的时候会默认使用截图
+
+        })
+    }
+    
 /*
     export class MyTestView extends Laya.Image {
         constructor() {
@@ -21,8 +49,9 @@ namespace sub {
 
     /**
      * 获取Key Value
+     * 解析getFriendCloudStorage拉取的元素节点
      */
-    function getValueByKey(_vo: IWeiXinFriendVO,key:string): string {
+    export function getValueByKey(_vo: IWeiXinFriendVO,key:string): string {
         if (_vo && _vo.KVDataList) {
             for (let i = 0; i < _vo.KVDataList.length; i++) {
                 let obj = _vo.KVDataList[i];
@@ -99,12 +128,7 @@ namespace sub {
         }
 
         private onYaoQing():void{
-            wx.shareMessageToFriend({
-                openId  : this.curData.openid, // 这里填写好友的openid
-                title   : '葫芦娃',
-                // imageUrl: 'https://mmocgame.qpic.cn/wechatgame/TKicR7oWel4znvwMdwOpuwoy1ntVB44kT9ZSse2u0xNcO5SaxIS2UwU0GdUfA2Al0/0'
-            })
-            //console.log(this.curData);
+            game_share(this.curData.openid);
         }
 
         public setData(data):void{
@@ -125,7 +149,7 @@ namespace sub {
             this.plist.itemRender = PaiHangYaoQingitem;
             this.plist.renderHandler = new Laya.Handler(this, this.onRenderHandler);
             this.on(Laya.Event.DISPLAY, this, this.onDisplay);
-            this.graphics.drawRect(0,0,this.width,this.height,"#ffffff");
+            // this.graphics.drawRect(0,0,this.width,this.height,"#ffffff");
         }
         private onRenderHandler(item:PaiHangYaoQingitem):void{
             item.setData(item.dataSource);
@@ -167,7 +191,7 @@ namespace sub {
                 this.yaoqing.graphics.drawRect(0,0,this.yaoqing.width,this.yaoqing.height,"#ff0000");
             }
             this.yaoqing.hitArea = new Laya.Rectangle(0,0,this.yaoqing.width,this.yaoqing.height);
-            this.yaoqing.on(Laya.Event.CLICK,this,this.onYaoQingHandler);
+            this.yaoqing.on(Laya.Event.CLICK,this,this.onYaoQingHandler);            
         }
 
         private onMaskClick():void{

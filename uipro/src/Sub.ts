@@ -1,5 +1,9 @@
 namespace sub {
     export let wx: IWeiXin = window["wx"];
+    export interface IGameData{
+        randomShare;
+    }
+    export let gameData:IGameData = {} as IGameData;
     export interface IWeiXin {
         onMessage(func);
         getFriendCloudStorage(obj);
@@ -108,7 +112,14 @@ namespace sub {
                 
                 switch (type) {
                     case EMessaageType.GetData:
-                        console.log(JSON.parse(message["gameconfig"]));
+                        for (const key in message) {
+                            if(key!="type"){
+                                gameData[key] = message[key];
+                                // console.log("#####################");
+                                // console.log(key);
+                                // console.log(message[key]);
+                            }
+                          }
                         break;
 
                     case EMessaageType.Init:
