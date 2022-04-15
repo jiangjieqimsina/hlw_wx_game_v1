@@ -60,6 +60,11 @@ window["tr_wx_openSub"]("clearCanvas");
 `window["tr_wx_ui"]("sub.HlwRankView",true);`  
 `window["tr_wx_ui"]("sub.HlwRankView",false);`
 
+# tr_wx_game_share
+开放域中的游戏定制分享接口
+```
+window['tr_wx_game_share'](openid);
+```
 
 # 注意事项
 * 1.`开放域是不可以加载远程资源的`,子域可以调用主域中的asset文件中的资源,  文件结构`asset/Loading.png`  
