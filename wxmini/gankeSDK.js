@@ -661,6 +661,9 @@ GameWXmini.getSystemInfo = function() {
     //获得邀请人参数
     GameWXmini.c_getFriendInviterCode = function(){
       var _lauchInfo = wx.getLaunchOptionsSync();
+      console.log("=====================================================");
+      console.log(_lauchInfo);
+      console.log(_lauchInfo.query);
       return _lauchInfo.query?{uid: _lauchInfo.query.uid, tasktype: _lauchInfo.query.tasktype}:"0";
     }
   
