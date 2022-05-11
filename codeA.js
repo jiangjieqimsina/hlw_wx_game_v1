@@ -51,6 +51,7 @@ var touzilic = w["touzilic"] = {};
 var xinfa = w["xinfa"] = {};
 var yuanshencode = w["yuanshencode"] = {};
 var ent = w["ent"] = {};
+var olddata = w["olddata"] = {};
 var manager = w["manager"] = {};
 var gamesdk = w["gamesdk"] = {};
 var util = w["util"] = {};
@@ -73,8 +74,10 @@ var fabaonew = w["fabaonew"] = {};
 var fatepool = w["fatepool"] = {};
 var forum = w["forum"] = {};
 var fulicode = w["fulicode"] = {};
+var fumo = w["fumo"] = {};
 var gaiming = w["gaiming"] = {};
 var goddungeon = w["goddungeon"] = {};
+var gongfa = w["gongfa"] = {};
 var guajiexp = w["guajiexp"] = {};
 var guardisland = w["guardisland"] = {};
 var guide = w["guide"] = {};
@@ -112,6 +115,7 @@ var renyichongzhi = w["renyichongzhi"] = {};
 var xiulian = w["xiulian"] = {};
 var sevenSoul = w["sevenSoul"] = {};
 var share = w["share"] = {};
+var shenbing = w["shenbing"] = {};
 var shouchonghaoli = w["shouchonghaoli"] = {};
 var guard = w["guard"] = {};
 var shoujibanding = w["shoujibanding"] = {};
@@ -611,6 +615,15 @@ var items;
             }
             if (x.itemCfg.level !== y.itemCfg.level) {
                 return x.itemCfg.level - y.itemCfg.level;
+            }
+            return 0;
+        };
+        ItemVO.FUMO_SORT_RULE = function (x, y) {
+            if (x.itemCfg.p1 !== y.itemCfg.p1) {
+                return x.itemCfg.p1 - y.itemCfg.p1;
+            }
+            if (x.itemCfg.qua !== y.itemCfg.qua) {
+                return x.itemCfg.qua - y.itemCfg.qua;
             }
             return 0;
         };
@@ -1567,6 +1580,41 @@ var ui;
             return dianshichengjintipsUI;
         }(Dialog));
         bag.dianshichengjintipsUI = dianshichengjintipsUI;
+    })(bag = ui.bag || (ui.bag = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var bag;
+    (function (bag) {
+        var huishoutipsUI = (function (_super) {
+            __extends(huishoutipsUI, _super);
+            function huishoutipsUI() {
+                return _super.call(this) || this;
+            }
+            huishoutipsUI.prototype.createChildren = function () {
+                View.regComponent("ui.common.daojubagitemUI", ui.common.daojubagitemUI);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("bag/huishoutips");
+            };
+            return huishoutipsUI;
+        }(Dialog));
+        bag.huishoutipsUI = huishoutipsUI;
+    })(bag = ui.bag || (ui.bag = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var bag;
+    (function (bag) {
+        var zhuangbeifumotuzhiviewUI = (function (_super) {
+            __extends(zhuangbeifumotuzhiviewUI, _super);
+            function zhuangbeifumotuzhiviewUI() {
+                return _super.call(this) || this;
+            }
+            zhuangbeifumotuzhiviewUI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.loadUI("bag/zhuangbeifumotuzhiview");
+            };
+            return zhuangbeifumotuzhiviewUI;
+        }(View));
+        bag.zhuangbeifumotuzhiviewUI = zhuangbeifumotuzhiviewUI;
     })(bag = ui.bag || (ui.bag = {}));
 })(ui || (ui = {}));
 (function (ui) {
@@ -8346,6 +8394,42 @@ var ui;
     })(fulidaing = ui.fulidaing || (ui.fulidaing = {}));
 })(ui || (ui = {}));
 (function (ui) {
+    var fumozhidi;
+    (function (fumozhidi) {
+        var fumozhidiitemUI = (function (_super) {
+            __extends(fumozhidiitemUI, _super);
+            function fumozhidiitemUI() {
+                return _super.call(this) || this;
+            }
+            fumozhidiitemUI.prototype.createChildren = function () {
+                View.regComponent("grids.GridView", grids.GridView);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("fumozhidi/fumozhidiitem");
+            };
+            return fumozhidiitemUI;
+        }(View));
+        fumozhidi.fumozhidiitemUI = fumozhidiitemUI;
+    })(fumozhidi = ui.fumozhidi || (ui.fumozhidi = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var fumozhidi;
+    (function (fumozhidi) {
+        var fumozhidiviewUI = (function (_super) {
+            __extends(fumozhidiviewUI, _super);
+            function fumozhidiviewUI() {
+                return _super.call(this) || this;
+            }
+            fumozhidiviewUI.prototype.createChildren = function () {
+                View.regComponent("ui.fumozhidi.fumozhidiitemUI", ui.fumozhidi.fumozhidiitemUI);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("fumozhidi/fumozhidiview");
+            };
+            return fumozhidiviewUI;
+        }(View));
+        fumozhidi.fumozhidiviewUI = fumozhidiviewUI;
+    })(fumozhidi = ui.fumozhidi || (ui.fumozhidi = {}));
+})(ui || (ui = {}));
+(function (ui) {
     var GM;
     (function (GM) {
         var GMUI = (function (_super) {
@@ -8758,7 +8842,6 @@ var ui;
                 return _super.call(this) || this;
             }
             gongfaitem02UI.prototype.createChildren = function () {
-                View.regComponent("ui.gongfa.gongfaitem01UI", ui.gongfa.gongfaitem01UI);
                 _super.prototype.createChildren.call(this);
                 this.loadUI("gongfa/gongfaitem02");
             };
@@ -8804,6 +8887,41 @@ var ui;
 (function (ui) {
     var gongfa;
     (function (gongfa) {
+        var gongfajiachengitem03UI = (function (_super) {
+            __extends(gongfajiachengitem03UI, _super);
+            function gongfajiachengitem03UI() {
+                return _super.call(this) || this;
+            }
+            gongfajiachengitem03UI.prototype.createChildren = function () {
+                View.regComponent("ui.gongfa.gongfajiachengitem04UI", ui.gongfa.gongfajiachengitem04UI);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("gongfa/gongfajiachengitem03");
+            };
+            return gongfajiachengitem03UI;
+        }(View));
+        gongfa.gongfajiachengitem03UI = gongfajiachengitem03UI;
+    })(gongfa = ui.gongfa || (ui.gongfa = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var gongfa;
+    (function (gongfa) {
+        var gongfajiachengitem04UI = (function (_super) {
+            __extends(gongfajiachengitem04UI, _super);
+            function gongfajiachengitem04UI() {
+                return _super.call(this) || this;
+            }
+            gongfajiachengitem04UI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.loadUI("gongfa/gongfajiachengitem04");
+            };
+            return gongfajiachengitem04UI;
+        }(View));
+        gongfa.gongfajiachengitem04UI = gongfajiachengitem04UI;
+    })(gongfa = ui.gongfa || (ui.gongfa = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var gongfa;
+    (function (gongfa) {
         var gongfajiachengtipUI = (function (_super) {
             __extends(gongfajiachengtipUI, _super);
             function gongfajiachengtipUI() {
@@ -8816,6 +8934,25 @@ var ui;
             return gongfajiachengtipUI;
         }(Dialog));
         gongfa.gongfajiachengtipUI = gongfajiachengtipUI;
+    })(gongfa = ui.gongfa || (ui.gongfa = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var gongfa;
+    (function (gongfa) {
+        var gongfajiachengtipnewUI = (function (_super) {
+            __extends(gongfajiachengtipnewUI, _super);
+            function gongfajiachengtipnewUI() {
+                return _super.call(this) || this;
+            }
+            gongfajiachengtipnewUI.prototype.createChildren = function () {
+                View.regComponent("ui.gongfa.gongfajiachengitem03UI", ui.gongfa.gongfajiachengitem03UI);
+                View.regComponent("ui.gongfa.gongfajiachengitem02UI", ui.gongfa.gongfajiachengitem02UI);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("gongfa/gongfajiachengtipnew");
+            };
+            return gongfajiachengtipnewUI;
+        }(Dialog));
+        gongfa.gongfajiachengtipnewUI = gongfajiachengtipnewUI;
     })(gongfa = ui.gongfa || (ui.gongfa = {}));
 })(ui || (ui = {}));
 (function (ui) {
@@ -8834,7 +8971,7 @@ var ui;
                 this.loadUI("gongfa/gongfajiesuoxiulianview");
             };
             return gongfajiesuoxiulianviewUI;
-        }(View));
+        }(Dialog));
         gongfa.gongfajiesuoxiulianviewUI = gongfajiesuoxiulianviewUI;
     })(gongfa = ui.gongfa || (ui.gongfa = {}));
 })(ui || (ui = {}));
@@ -8881,13 +9018,30 @@ var ui;
                 return _super.call(this) || this;
             }
             gongfaviewUI.prototype.createChildren = function () {
-                View.regComponent("ui.gongfa.gongfaitem02UI", ui.gongfa.gongfaitem02UI);
+                View.regComponent("ui.gongfa.gongfafuzengitemUI", ui.gongfa.gongfafuzengitemUI);
                 _super.prototype.createChildren.call(this);
                 this.loadUI("gongfa/gongfaview");
             };
             return gongfaviewUI;
         }(View));
         gongfa.gongfaviewUI = gongfaviewUI;
+    })(gongfa = ui.gongfa || (ui.gongfa = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var gongfa;
+    (function (gongfa) {
+        var gongfaxiangxishuxingtipUI = (function (_super) {
+            __extends(gongfaxiangxishuxingtipUI, _super);
+            function gongfaxiangxishuxingtipUI() {
+                return _super.call(this) || this;
+            }
+            gongfaxiangxishuxingtipUI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.loadUI("gongfa/gongfaxiangxishuxingtip");
+            };
+            return gongfaxiangxishuxingtipUI;
+        }(Dialog));
+        gongfa.gongfaxiangxishuxingtipUI = gongfaxiangxishuxingtipUI;
     })(gongfa = ui.gongfa || (ui.gongfa = {}));
 })(ui || (ui = {}));
 (function (ui) {
@@ -8919,11 +9073,14 @@ var ui;
             gongfaxiulianviewUI.prototype.createChildren = function () {
                 View.regComponent("ui.gongfa.gongfaxiulianview01UI", ui.gongfa.gongfaxiulianview01UI);
                 View.regComponent("grids.GridView", grids.GridView);
+                View.regComponent("ui.gongfa.gongfaxiulianview02UI", ui.gongfa.gongfaxiulianview02UI);
+                View.regComponent("ui.gongfa.gongfaxiulianview03UI", ui.gongfa.gongfaxiulianview03UI);
+                View.regComponent("ui.gongfa.gongfaxiulianview04UI", ui.gongfa.gongfaxiulianview04UI);
                 _super.prototype.createChildren.call(this);
                 this.loadUI("gongfa/gongfaxiulianview");
             };
             return gongfaxiulianviewUI;
-        }(View));
+        }(Dialog));
         gongfa.gongfaxiulianviewUI = gongfaxiulianviewUI;
     })(gongfa = ui.gongfa || (ui.gongfa = {}));
 })(ui || (ui = {}));
@@ -8943,6 +9100,60 @@ var ui;
             return gongfaxiulianview01UI;
         }(View));
         gongfa.gongfaxiulianview01UI = gongfaxiulianview01UI;
+    })(gongfa = ui.gongfa || (ui.gongfa = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var gongfa;
+    (function (gongfa) {
+        var gongfaxiulianview02UI = (function (_super) {
+            __extends(gongfaxiulianview02UI, _super);
+            function gongfaxiulianview02UI() {
+                return _super.call(this) || this;
+            }
+            gongfaxiulianview02UI.prototype.createChildren = function () {
+                View.regComponent("ui.gongfa.gongfaxiulianitem01UI", ui.gongfa.gongfaxiulianitem01UI);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("gongfa/gongfaxiulianview02");
+            };
+            return gongfaxiulianview02UI;
+        }(View));
+        gongfa.gongfaxiulianview02UI = gongfaxiulianview02UI;
+    })(gongfa = ui.gongfa || (ui.gongfa = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var gongfa;
+    (function (gongfa) {
+        var gongfaxiulianview03UI = (function (_super) {
+            __extends(gongfaxiulianview03UI, _super);
+            function gongfaxiulianview03UI() {
+                return _super.call(this) || this;
+            }
+            gongfaxiulianview03UI.prototype.createChildren = function () {
+                View.regComponent("ui.gongfa.gongfaxiulianitem01UI", ui.gongfa.gongfaxiulianitem01UI);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("gongfa/gongfaxiulianview03");
+            };
+            return gongfaxiulianview03UI;
+        }(View));
+        gongfa.gongfaxiulianview03UI = gongfaxiulianview03UI;
+    })(gongfa = ui.gongfa || (ui.gongfa = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var gongfa;
+    (function (gongfa) {
+        var gongfaxiulianview04UI = (function (_super) {
+            __extends(gongfaxiulianview04UI, _super);
+            function gongfaxiulianview04UI() {
+                return _super.call(this) || this;
+            }
+            gongfaxiulianview04UI.prototype.createChildren = function () {
+                View.regComponent("ui.gongfa.gongfaxiulianitem01UI", ui.gongfa.gongfaxiulianitem01UI);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("gongfa/gongfaxiulianview04");
+            };
+            return gongfaxiulianview04UI;
+        }(View));
+        gongfa.gongfaxiulianview04UI = gongfaxiulianview04UI;
     })(gongfa = ui.gongfa || (ui.gongfa = {}));
 })(ui || (ui = {}));
 (function (ui) {
@@ -19986,6 +20197,23 @@ var ui;
 (function (ui) {
     var shanhaixiangyaolu;
     (function (shanhaixiangyaolu) {
+        var tishiUI = (function (_super) {
+            __extends(tishiUI, _super);
+            function tishiUI() {
+                return _super.call(this) || this;
+            }
+            tishiUI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.loadUI("shanhaixiangyaolu/tishi");
+            };
+            return tishiUI;
+        }(Dialog));
+        shanhaixiangyaolu.tishiUI = tishiUI;
+    })(shanhaixiangyaolu = ui.shanhaixiangyaolu || (ui.shanhaixiangyaolu = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var shanhaixiangyaolu;
+    (function (shanhaixiangyaolu) {
         var yaoguaitujianiviewUI = (function (_super) {
             __extends(yaoguaitujianiviewUI, _super);
             function yaoguaitujianiviewUI() {
@@ -23821,6 +24049,41 @@ var ui;
     })(weixin = ui.weixin || (ui.weixin = {}));
 })(ui || (ui = {}));
 (function (ui) {
+    var weixin;
+    (function (weixin) {
+        var yaoqinghaoyouitemUI = (function (_super) {
+            __extends(yaoqinghaoyouitemUI, _super);
+            function yaoqinghaoyouitemUI() {
+                return _super.call(this) || this;
+            }
+            yaoqinghaoyouitemUI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.loadUI("weixin/yaoqinghaoyouitem");
+            };
+            return yaoqinghaoyouitemUI;
+        }(View));
+        weixin.yaoqinghaoyouitemUI = yaoqinghaoyouitemUI;
+    })(weixin = ui.weixin || (ui.weixin = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var weixin;
+    (function (weixin) {
+        var yaoqinghaoyoutipUI = (function (_super) {
+            __extends(yaoqinghaoyoutipUI, _super);
+            function yaoqinghaoyoutipUI() {
+                return _super.call(this) || this;
+            }
+            yaoqinghaoyoutipUI.prototype.createChildren = function () {
+                View.regComponent("ui.weixin.yaoqinghaoyouitemUI", ui.weixin.yaoqinghaoyouitemUI);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("weixin/yaoqinghaoyoutip");
+            };
+            return yaoqinghaoyoutipUI;
+        }(Dialog));
+        weixin.yaoqinghaoyoutipUI = yaoqinghaoyoutipUI;
+    })(weixin = ui.weixin || (ui.weixin = {}));
+})(ui || (ui = {}));
+(function (ui) {
     var wenjuandiaocha;
     (function (wenjuandiaocha) {
         var wenjuandiaochatipUI = (function (_super) {
@@ -24568,6 +24831,23 @@ var ui;
             return kongweiitemUI;
         }(View));
         xianshouju.kongweiitemUI = kongweiitemUI;
+    })(xianshouju = ui.xianshouju || (ui.xianshouju = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var xianshouju;
+    (function (xianshouju) {
+        var tishiUI = (function (_super) {
+            __extends(tishiUI, _super);
+            function tishiUI() {
+                return _super.call(this) || this;
+            }
+            tishiUI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.loadUI("xianshouju/tishi");
+            };
+            return tishiUI;
+        }(Dialog));
+        xianshouju.tishiUI = tishiUI;
     })(xianshouju = ui.xianshouju || (ui.xianshouju = {}));
 })(ui || (ui = {}));
 (function (ui) {
@@ -30055,6 +30335,41 @@ var ui;
 (function (ui) {
     var zhuangbei;
     (function (zhuangbei) {
+        var fumoitemUI = (function (_super) {
+            __extends(fumoitemUI, _super);
+            function fumoitemUI() {
+                return _super.call(this) || this;
+            }
+            fumoitemUI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.loadUI("zhuangbei/fumoitem");
+            };
+            return fumoitemUI;
+        }(View));
+        zhuangbei.fumoitemUI = fumoitemUI;
+    })(zhuangbei = ui.zhuangbei || (ui.zhuangbei = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var zhuangbei;
+    (function (zhuangbei) {
+        var fumoitem2UI = (function (_super) {
+            __extends(fumoitem2UI, _super);
+            function fumoitem2UI() {
+                return _super.call(this) || this;
+            }
+            fumoitem2UI.prototype.createChildren = function () {
+                View.regComponent("equip.RoleEquipItem", equip.RoleEquipItem);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("zhuangbei/fumoitem2");
+            };
+            return fumoitem2UI;
+        }(View));
+        zhuangbei.fumoitem2UI = fumoitem2UI;
+    })(zhuangbei = ui.zhuangbei || (ui.zhuangbei = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var zhuangbei;
+    (function (zhuangbei) {
         var gongmingxiaoguoitem1UI = (function (_super) {
             __extends(gongmingxiaoguoitem1UI, _super);
             function gongmingxiaoguoitem1UI() {
@@ -30404,8 +30719,9 @@ var ui;
             }
             zhuangbeifumotipsUI.prototype.createChildren = function () {
                 View.regComponent("ui.common.xiaohaoitemUI", ui.common.xiaohaoitemUI);
-                View.regComponent("equip.RoleEquipItem", equip.RoleEquipItem);
                 View.regComponent("ui.zhuangbei.fumocizhuiitem01UI", ui.zhuangbei.fumocizhuiitem01UI);
+                View.regComponent("equip.RoleEquipFumoPeifangItem", equip.RoleEquipFumoPeifangItem);
+                View.regComponent("Laya.UiAnimation", Laya.UiAnimation);
                 _super.prototype.createChildren.call(this);
                 this.loadUI("zhuangbei/zhuangbeifumotips");
             };
@@ -30423,11 +30739,11 @@ var ui;
                 return _super.call(this) || this;
             }
             zhuangbeifumoviewUI.prototype.createChildren = function () {
-                View.regComponent("fabaonew.FaBaoNewItem", fabaonew.FaBaoNewItem);
                 View.regComponent("ui.zhuangbei.zhuangbeiitem1newUI", ui.zhuangbei.zhuangbeiitem1newUI);
-                View.regComponent("equip.RoleEquipItem", equip.RoleEquipItem);
                 View.regComponent("ui.zhuangbei.fumocizhuiitem02UI", ui.zhuangbei.fumocizhuiitem02UI);
                 View.regComponent("ui.common.xiaohaoitemUI", ui.common.xiaohaoitemUI);
+                View.regComponent("equip.RoleEquipFumoItem", equip.RoleEquipFumoItem);
+                View.regComponent("Laya.UiAnimation", Laya.UiAnimation);
                 _super.prototype.createChildren.call(this);
                 this.loadUI("zhuangbei/zhuangbeifumoview");
             };
@@ -30446,6 +30762,7 @@ var ui;
             }
             zhuangbeifumoxuanzetipsUI.prototype.createChildren = function () {
                 View.regComponent("ui.zhuangbei.fumocizhuiitem01UI", ui.zhuangbei.fumocizhuiitem01UI);
+                View.regComponent("Laya.UiAnimation", Laya.UiAnimation);
                 _super.prototype.createChildren.call(this);
                 this.loadUI("zhuangbei/zhuangbeifumoxuanzetips");
             };
@@ -31953,7 +32270,9 @@ var common;
     var CommonWindow12 = (function (_super) {
         __extends(CommonWindow12, _super);
         function CommonWindow12() {
-            return _super !== null && _super.apply(this, arguments) || this;
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.fullScreen = "fullScreen";
+            return _this;
         }
         CommonWindow12.getIns = function () {
             return app.Singleton.getInstance(CommonWindow12);
@@ -32008,9 +32327,15 @@ var items;
             _this.gem = {};
             /** 淬炼等级 3 */
             _this.quench = [];
+            //附魔id
+            _this.fid = 0;
+            //附魔lv
+            _this.flv = 0;
             if (serverData) {
                 _this.strenLv = serverData.strenlv;
                 _this.refineLv = serverData.refine;
+                _this.fid = serverData.fid;
+                _this.flv = serverData.flv;
                 for (var i = 0, len = serverData.gem.length; i < len; i++) {
                     var g = serverData.gem[i];
                     _this.gem[g.gempos] = g.gemid;
@@ -32038,6 +32363,10 @@ var items;
                             this._score += refineEle["score" + (i + 1)];
                         }
                     }
+                }
+                if (this.fid && this.flv) {
+                    var lvCfg = csv.EquipProxy.getIns().getEquipFumoLvCfgMap(this.fid, this.flv);
+                    this._score += lvCfg.score;
                 }
                 var wan = 0;
                 for (var key in this.gem) {
@@ -32539,9 +32868,13 @@ var role;
             this.avatar.play(1);
         };
         CharactorView.prototype.showSkillName = function (attackVo) {
+            var boMine = game.Context.isMainRole(this.vo.insId);
             if (attackVo.showSkill.skillshow != "") {
-                if (attackVo.showSkill.skillorigin == csv.SkillProxy.ORIGIN_ENUM.FABAO && game.Context.isMainRole(this.vo.insId)) {
+                if (boMine && attackVo.showSkill.skillorigin == csv.SkillProxy.ORIGIN_ENUM.FABAO) {
                     manager.BattleFlowManager.ins.addList(attackVo.showSkill.skillshow);
+                }
+                else if (boMine && attackVo.showSkill.skillorigin == csv.SkillProxy.ORIGIN_ENUM.SHENBING) {
+                    manager.BattleFlowManager.ins.flyShenbingSkill(attackVo.showSkill.skillshow);
                 }
                 else if (attackVo.showSkill.skillorigin == csv.SkillProxy.ORIGIN_ENUM.WUXING) {
                     manager.BattleFlowManager.ins.flyWuxingSkill(attackVo.showSkill.skillshow);
@@ -32551,8 +32884,10 @@ var role;
                     view.setSkillImg(attackVo.showSkill.skillshow, attackVo.attackView.x, attackVo.attackView.y, attackVo.attackView.charactorVO.getModelHeight());
                 }
             }
-            if (attackVo.showSkill.skillorigin == csv.SkillProxy.ORIGIN_ENUM.MOUNT && game.Context.isMainRole(this.vo.insId)) {
-                manager.BattleFlowManager.ins.flyMount(attackVo.showSkill);
+            if (boMine) {
+                if (attackVo.showSkill.skillorigin == csv.SkillProxy.ORIGIN_ENUM.MOUNT) {
+                    manager.BattleFlowManager.ins.flyMount(attackVo.showSkill);
+                }
             }
             if (attackVo.showSkill.sceneeffect != "") {
                 var eff = Laya.Pool.getItemByClass(skill.SceneSkillEffect.SINGLE_KEY, skill.SceneSkillEffect);
@@ -35645,6 +35980,7 @@ var DailyActInf = (function () {
         data.dialdrawInf = B.ra(byte, DialDrawData.r);
         data.vecRp = B.ra(byte, B.ru32);
         data.checkpoint_fail_times = B.ru32(byte);
+        data.newAward = B.ra(byte, B.ru32);
         return data;
     };
     DailyActInf.w = function (byte, data) {
@@ -35682,6 +36018,7 @@ var DailyActInf = (function () {
         B.wa(byte, data.dialdrawInf, DialDrawData.w);
         B.wa(byte, data.vecRp, B.wu32);
         B.wu32(byte, data.checkpoint_fail_times);
+        B.wa(byte, data.newAward, B.wu32);
         return byte;
     };
     return DailyActInf;
@@ -39657,11 +39994,13 @@ var MountDataDB = (function () {
         !data ? data = new MountDataDB() : data;
         data.mountainId = B.ru16(byte);
         data.awardid = B.ra(byte, B.ru16);
+        data.fmbkId = B.ru16(byte);
         return data;
     };
     MountDataDB.w = function (byte, data) {
         B.wu16(byte, data.mountainId);
         B.wa(byte, data.awardid, B.wu16);
+        B.wu16(byte, data.fmbkId);
         return byte;
     };
     return MountDataDB;
@@ -41095,6 +41434,52 @@ var QiYuPData = (function () {
 /**
  *
  */
+var GongfaData = (function () {
+    function GongfaData() {
+    }
+    GongfaData.r = function (byte, data) {
+        !data ? data = new GongfaData() : data;
+        data.gongfaId = B.ru32(byte);
+        data.cfgId = B.ru32(byte);
+        return data;
+    };
+    GongfaData.w = function (byte, data) {
+        B.wu32(byte, data.gongfaId);
+        B.wu32(byte, data.cfgId);
+        return byte;
+    };
+    return GongfaData;
+}());
+/**
+ *
+ */
+var GongfaAllData = (function () {
+    function GongfaAllData() {
+    }
+    GongfaAllData.r = function (byte, data) {
+        !data ? data = new GongfaAllData() : data;
+        data.gData = B.ra(byte, GongfaData.r);
+        data.vecRecvId = B.ra(byte, B.ru32);
+        data.vecTask = B.ra(byte, B.ru32);
+        data.maxQua = B.ru16(byte);
+        data.consume = B.ru32(byte);
+        data.gongfaId = B.ru32(byte);
+        return data;
+    };
+    GongfaAllData.w = function (byte, data) {
+        B.wa(byte, data.gData, GongfaData.w);
+        B.wa(byte, data.vecRecvId, B.wu32);
+        B.wa(byte, data.vecTask, B.wu32);
+        B.wu16(byte, data.maxQua);
+        B.wu32(byte, data.consume);
+        B.wu32(byte, data.gongfaId);
+        return byte;
+    };
+    return GongfaAllData;
+}());
+/**
+ *
+ */
 var WxShareData = (function () {
     function WxShareData() {
     }
@@ -41135,6 +41520,25 @@ var WxGmRoleData = (function () {
         return byte;
     };
     return WxGmRoleData;
+}());
+/**
+ *
+ */
+var WxHelpData = (function () {
+    function WxHelpData() {
+    }
+    WxHelpData.r = function (byte, data) {
+        !data ? data = new WxHelpData() : data;
+        data.type = B.ru32(byte);
+        data.vecHelp = B.ra(byte, B.ru64);
+        return data;
+    };
+    WxHelpData.w = function (byte, data) {
+        B.wu32(byte, data.type);
+        B.wa(byte, data.vecHelp, B.wu64);
+        return byte;
+    };
+    return WxHelpData;
 }());
 /**
  *
@@ -41217,6 +41621,27 @@ var ShenbingGoingData = (function () {
         return byte;
     };
     return ShenbingGoingData;
+}());
+/**
+ *
+ */
+var ShenbingDBData = (function () {
+    function ShenbingDBData() {
+    }
+    ShenbingDBData.r = function (byte, data) {
+        !data ? data = new ShenbingDBData() : data;
+        data.used_shenbing = B.ru32(byte);
+        data.activedList = B.ra(byte, ShenbingData.r);
+        data.onGoing = B.ra(byte, ShenbingGoingData.r);
+        return data;
+    };
+    ShenbingDBData.w = function (byte, data) {
+        B.wu32(byte, data.used_shenbing);
+        B.wa(byte, data.activedList, ShenbingData.w);
+        B.wa(byte, data.onGoing, ShenbingGoingData.w);
+        return byte;
+    };
+    return ShenbingDBData;
 }());
 // =======Response==========
 /**
@@ -43490,8 +43915,9 @@ var DailyActNtf = (function () {
         }
         this.adaily = B.ra(byte, DailyDgnInf.r);
         this.actnum = B.ru32(byte);
-        this.award = B.ra(byte, B.ru8);
         this.cdinf = B.ra(byte, RoleCDInf.r);
+        this.actAward = B.ra(byte, B.ru32);
+        this.award = B.ra(byte, B.ru32);
     }
     return DailyActNtf;
 }());
@@ -43529,7 +43955,7 @@ var AwardActPointAck = (function () {
             return;
         }
         this.result = B.ru8(byte);
-        this.award = B.ra(byte, B.ru8);
+        this.award = B.ra(byte, B.ru32);
     }
     return AwardActPointAck;
 }());
@@ -44976,6 +45402,46 @@ var StopGatherAck = (function () {
         this.playerID = B.ru64(byte);
     }
     return StopGatherAck;
+}());
+/**
+ * 功法信息同步
+ */
+var GongfaDataNtf = (function () {
+    function GongfaDataNtf(byte) {
+        if (byte == null) {
+            return;
+        }
+        this.gData = B.ra(byte, GongfaData.r);
+        this.vecRecvId = B.ra(byte, B.ru32);
+        this.maxQua = B.ru16(byte);
+        this.consume = B.ru32(byte);
+        this.gongfaId = B.ru32(byte);
+    }
+    return GongfaDataNtf;
+}());
+/**
+ * 功法领悟/修炼返回
+ */
+var GongfaGraspResp = (function () {
+    function GongfaGraspResp(byte) {
+        if (byte == null) {
+            return;
+        }
+        this.ret = B.ru8(byte);
+    }
+    return GongfaGraspResp;
+}());
+/**
+ * 功法点消耗奖励领取返回
+ */
+var GongfaTaskResp = (function () {
+    function GongfaTaskResp(byte) {
+        if (byte == null) {
+            return;
+        }
+        this.ret = B.ru8(byte);
+    }
+    return GongfaTaskResp;
 }());
 /**
  * 葫芦状态同步
@@ -47896,6 +48362,43 @@ var AwardMountainAck = (function () {
     return AwardMountainAck;
 }());
 /**
+ * 附魔宝库信息 同步
+ */
+var FmbkInfoNtf = (function () {
+    function FmbkInfoNtf(byte) {
+        if (byte == null) {
+            return;
+        }
+        this.fmbkId = B.ru16(byte);
+    }
+    return FmbkInfoNtf;
+}());
+/**
+ * 返回挑战结果
+ */
+var FmbkChallengeAck = (function () {
+    function FmbkChallengeAck(byte) {
+        if (byte == null) {
+            return;
+        }
+        this.success = B.ru8(byte);
+    }
+    return FmbkChallengeAck;
+}());
+/**
+ * 返回扫荡结果
+ */
+var FmbkSweepAck = (function () {
+    function FmbkSweepAck(byte) {
+        if (byte == null) {
+            return;
+        }
+        this.success = B.ru8(byte);
+        this.num = B.ru8(byte);
+    }
+    return FmbkSweepAck;
+}());
+/**
  * 巅峰 同步
  */
 var PeakNtf = (function () {
@@ -48792,6 +49295,18 @@ var DongfuMagicLayResp = (function () {
         this.result = B.ru8(byte);
     }
     return DongfuMagicLayResp;
+}());
+/**
+ * 元神自动突破结果
+ */
+var SecSoulAutoTupoAck = (function () {
+    function SecSoulAutoTupoAck(byte) {
+        if (byte == null) {
+            return;
+        }
+        this.ret = B.ru8(byte);
+    }
+    return SecSoulAutoTupoAck;
 }());
 /**
  * 七子之魂信息返回
@@ -50972,6 +51487,12 @@ var list;
             }
             return true;
         };
+        /**
+         * 偏移当前高度值,做间隔
+         */
+        JListCustom.prototype.offsetHeight = function (y) {
+            this._allHeight += y;
+        };
         JListCustom.prototype.init = function (panel) {
             if (!this.panel) {
                 this.panel = panel;
@@ -51085,7 +51606,7 @@ var list;
          * @param cls 数据类的模板
          * @param itemHeight 渲染对象的高度
          * @param gap 每个横向对象的高度间隔
-         * @param maxRow 每行最大的数量 一行需要的的数据节点数
+         * @param maxRow 每行最大的数量 一行需要的的数据节点数 默认是1
          */
         JListCustom.prototype.split = function (listData, cls, itemHeight, gap, maxRow) {
             if (gap === void 0) { gap = 0; }
@@ -51947,6 +52468,33 @@ var grids;
                         var scoreState = xinfa.XinFaModel.getIns().getCompareScore(value);
                         this.refreshScore(scoreState);
                     }
+                    else if (value.itemCfg.type == csv.ItemProxy.TYPES.FUMO) {
+                        if (!this.fumoLabel) {
+                            this.fumoLabel = new Laya.Image();
+                        }
+                        this.fumoLabel.top = 10;
+                        this.fumoLabel.right = 10;
+                        this.fumoLabel.skin = "res/static/zhuangbei/bg_jiaobiao_" + value.itemCfg.p1 + ".png";
+                        // this.fumoLabel.font = "SimHei";
+                        // this.fumoLabel.fontSize = 20;
+                        // this.fumoLabel.color = "#ffffff";
+                        this.fumoLabel.width = this.fumoLabel.height = 30;
+                        // if(value.itemCfg.p1 == 1){
+                        //     this.fumoLabel.skin = "武";
+                        // }else if(value.itemCfg.p1 == 2){
+                        //     this.fumoLabel.skin = "衣";
+                        // }else if(value.itemCfg.p1 == 3){
+                        //     this.fumoLabel.skin = "鞋";
+                        // }else if(value.itemCfg.p1 == 4){
+                        //     this.fumoLabel.skin = "项";
+                        // }else if(value.itemCfg.p1 == 5){
+                        //     this.fumoLabel.skin = "佩";
+                        // }else{
+                        //     this.fumoLabel.skin = "戒";
+                        // }
+                        this.addChild(this.fumoLabel);
+                        // this.refreshScore(scoreState);
+                    }
                     else if (value.itemCfg.type == csv.ItemProxy.TYPES.DANYAO) {
                         var qua = item.getQuality();
                         var isViewShow = app.ViewManager.DisplayedInStage(danfang.LianZhiJieShuTip.SINGLE_KEY);
@@ -52114,6 +52662,9 @@ var grids;
         GridView.prototype.clear = function () {
             if (this._showBagCount != -3) {
                 this.shuzi.text = "";
+            }
+            if (this.fumoLabel) {
+                this.fumoLabel.removeSelf();
             }
             this.resetShuZi();
             this.gezibg.skin = "public/gridbg01.png";
@@ -52752,8 +53303,7 @@ var pet;
                     total += list[i].count;
                 }
                 else if (list[i].itemCfg.qua == this._qua) {
-                    total = list[i].count;
-                    break;
+                    total += list[i].count;
                 }
             }
             return total;
@@ -52779,7 +53329,7 @@ var pet;
             this.boxluzi.mouseThrough = true;
             this.chongwu.itemRender = pet.EggItem;
             this.chongwu.renderHandler = new Laya.Handler(this, this.onItemRender);
-            this.girds = [this.dan1, this.dan2, this.dan3, this.dan4];
+            this.girds = [this.dan1, this.dan2, this.dan3, this.dan4, this.dan5];
             for (var i = 0; i < this.girds.length; i++) {
                 this.girds[i].init(i);
             }
@@ -53308,7 +53858,7 @@ var role;
             return _this;
         }
         BattlePetShow.prototype.init = function (petid) {
-            // this.imgPet.skin = csv.MonsterProxy.getMonsterHeadUrl(csv.PetProxy.getIns().getPetCfg(petid).monid);
+            this.imgPet.skin = csv.MonsterProxy.getMonsterHeadUrl(csv.PetProxy.getIns().getPetCfg(petid).monid);
             this.alpha = 1;
             this.scale(1.5, 1.5);
             this.boomEff.play(0, false);
@@ -54470,11 +55020,11 @@ var app;
                 this.save(byte);
             }
             else {
-                var cmd = byte.getUint16(); //cmd or other
+                var cmd_1 = byte.getUint16(); //cmd or other
                 // if(cmd == 0x511e || cmd == 0x4601){
                 //     return;
                 // }
-                this.curcmd = cmd;
+                this.curcmd = cmd_1;
                 // byte.pos+=2;//
                 this.stickyLen = this.getRealLen(byte); //协议包真实长度;
                 this.buffer.clear();
@@ -55030,6 +55580,9 @@ var activitytaren;
                 activitytaren.ActivityTaRenType.XIANG_YAO_DING_ZHI,
                 activitytaren.ActivityTaRenType.TONGTIANGE,
                 activitytaren.ActivityTaRenType.ZERO,
+                activitytaren.ActivityTaRenType.YI_SHOU_RUQING_LIBAO,
+                activitytaren.ActivityTaRenType.TONGTIANGE_SHOP,
+                activitytaren.ActivityTaRenType.QIYUTANSUO_GIFT,
             ];
             this.isInit = true;
             this.popoutList = [];
@@ -56359,7 +56912,8 @@ var bag;
                 csv.ItemProxy.TYPES.EQUIP,
                 csv.ItemProxy.TYPES.BAOSHI,
                 csv.ItemProxy.TYPES.DANYAO,
-                csv.ItemProxy.TYPES.PET
+                csv.ItemProxy.TYPES.PET,
+                csv.ItemProxy.TYPES.FUMO
             ];
             return _this;
         }
@@ -56438,6 +56992,17 @@ var bag;
             for (var i = 0; i < grid.itemList.length; ++i) {
                 var vo = grid.itemList[i];
                 if (csv.ItemProxy.TYPES.BAOSHI == vo.itemCfg.type) {
+                    ret.push(vo);
+                }
+            }
+            return ret;
+        };
+        BagModel.prototype.getFumos = function () {
+            var ret = [];
+            var grid = game.GridsModel.getIns().getGridByType(game.GridsModel.BAG_ITEM);
+            for (var i = 0; i < grid.itemList.length; ++i) {
+                var vo = grid.itemList[i];
+                if (csv.ItemProxy.TYPES.FUMO == vo.itemCfg.type) {
                     ret.push(vo);
                 }
             }
@@ -57147,6 +57712,7 @@ var battle;
             this.funOpenBack = new Laya.Handler(this, this.onFuncBack);
             this.centerLayout = new game.CenterLayoutMediator(this.rukoulist, this.boxList, 105, 10);
             this.manager = battle.BattleManager.getIns();
+            battle.BattleHurtRecordView.register(this.btnshanghaitongji);
         };
         BattleLoseView.prototype.onFuncHandler = function (cell, index) {
             cell.setData(cell.dataSource);
@@ -57914,6 +58480,9 @@ var boss;
                 }
                 else if (vo.dtype == csv.DailyTimeProxy.ENUM_TYPE.QUICK_GUAJI) {
                     game.RoleModel.getIns().onRedDotChange();
+                }
+                else if (vo.dtype == csv.DailyTimeProxy.ENUM_TYPE.FUMO) {
+                    fumo.FumoEarthModel.getIns().onUpdateRedDot();
                 }
             }
             this.event(BossEvent.BOSS_DAILY_TIME_CHANGE);
@@ -60641,6 +61210,9 @@ var game;
             this.addModule(yishou.YiShouModule);
             this.addModule(qiYu.QiYuModule);
             this.addModule(share.ShareModule);
+            this.addModule(fumo.FumoEarthModule);
+            this.addModule(shenbing.ShenbingMudule);
+            this.addModule(gongfa.GongFaModule);
             manager.AttributeFlowManager.instance;
             app.SoundManager.getIns().init();
             app.VideoManager.getIns().init();
@@ -63256,7 +63828,12 @@ var game;
                 if (own < item.count) {
                     if (isTip) {
                         if (item.itemCfg.id == game.ItemUtil.ENUMS.YUANBAO) {
-                            shop.ShopModel.getIns().askChongZhi();
+                            if (csv.MapProxy.isInKuaFuMap()) {
+                                manager.FlowManager.instance.flowByStyle1(app.getLang("跨服中不可充值"));
+                            }
+                            else {
+                                shop.ShopModel.getIns().askChongZhi();
+                            }
                         }
                         else {
                             manager.FlowManager.instance.flowByStyle1(app.getLang("item_not_enough", csv.ItemProxy.getName(item.itemCfg)));
@@ -64698,7 +65275,8 @@ var guaji;
             var chart = guaji.SecretAreaModel.getIns().getChartValue(this.areaId);
             var count = data.count * chart * 60;
             if (this._total > 0) {
-                count = Math.floor(count * (1 + this._total * 0.01));
+                count = Math.floor(count * (1 + this._total));
+                count = Math.floor(count * (1 + (this.sumFabaoLinqi() * 0.01)));
             }
             cell.iconMoney.parserIcon(data.getItemId() + "-" + count, cell.labeljifen);
             cell.labeljifen.text += "/时";
@@ -64767,7 +65345,7 @@ var guaji;
                     this.buffIcon.parser(arr, opeaData.condition, 0.7);
                     this.caijizhong.play(0, true);
                     this.shouyilist.array = game.ItemUtil.parserList(ele.rewardshow);
-                    this.weihuodelab.text = app.getLang("当前秘境探索收益+{0}%", this._total);
+                    this.weihuodelab.text = app.getLang("当前秘境探索收益+{0}%", this._total + this.sumFabaoLinqi());
                 }
                 else if (chartData) {
                     this.titlename.text = app.getLang("尚未派遣");
@@ -64808,6 +65386,32 @@ var guaji;
                 this.boxItem.gray = true;
                 this.txtTime.text = "";
             }
+        };
+        ChartItem.prototype.sumFabaoLinqi = function () {
+            var num = 0;
+            var res = [];
+            var arr = chart.ChartModel.getIns().chartDatas;
+            for (var i = 0; i < arr.length; i++) {
+                var arr2 = arr[i].magicLay;
+                for (var j = 0; j < arr2.length; j++) {
+                    if (arr2[j] != 0) {
+                        res.push(arr2[j]);
+                    }
+                }
+            }
+            for (var i = 0; i < res.length; i++) {
+                var vo = fabaonew.FaBaoNewModel.getIns().getMagicCfgById(res[i]);
+                if (vo) {
+                    var magicStarXCfg = csv.FaBaoNewProxy.getIns().getMagicStarMapitem(res[i], vo.star);
+                    if (magicStarXCfg) {
+                        num += magicStarXCfg.jiguanadd / 100;
+                    }
+                    else {
+                        num += vo.cfg.jiguanadd / 100;
+                    }
+                }
+            }
+            return +num.toFixed(1);
         };
         return ChartItem;
     }(ui.guaji.mijingshouyiitem1UI));
@@ -65773,7 +66377,7 @@ var main;
             }
         };
         MapBaseControl.prototype.setRolePetShow = function () {
-            Laya.timer.once(1000, this, this.playPetShow);
+            // Laya.timer.once(1000, this, this.playPetShow);
         };
         MapBaseControl.prototype.playPetShow = function () {
             var info = this.model.battleInfo;
@@ -66006,6 +66610,7 @@ var mjhole;
             this._model = mjhole.MjHoleModel.getIns();
             this.btndashijiyao.on(Laya.Event.CLICK, this, this.openBigEventView);
             this.btntanxian.on(Laya.Event.CLICK, this, this.openTeamView);
+            this.btnzuoqi.visible = false;
             this.gap = 280 + this.list.spaceY;
             this.list.scrollBar.on(Laya.Event.CHANGE, this, this.onChange);
             guide.GuideModel.getIns().register(csv.GuideProxy.ENUM_VIEW.MJHOLE_SELECT, this, this.getGuideItemBtn);
@@ -67084,6 +67689,24 @@ var pet;
             this.plevel = data.plevel;
             this.pexp = data.pexp;
         };
+        PetVO.createMaxPet = function (petEggId) {
+            var ele = csv.PetProxy.getIns().getGrow(petEggId);
+            var vo = new pet.PetVO(Uint64.ZERO, ele.petid);
+            vo.star = vo.petCfg.star;
+            vo.plevel = vo.petCfg.level;
+            vo.prop = [];
+            var data;
+            var params = app.str2Array(ele.baseattr, "-");
+            for (var i = 0; i < params.length; i++) {
+                data = new PetPropRand();
+                data.rand = parseInt(params[i]);
+                data.tal = 7;
+                var prop = Attributes.decode(csv.PetProxy.getIns().getBaseAttr(data.rand)).baseList[0];
+                data.val = parseInt(csv.PetProxy.getIns().getTalent(prop.propId));
+                vo.prop.push(data);
+            }
+            return vo;
+        };
         return PetVO;
     }());
     pet_1.PetVO = PetVO;
@@ -67109,7 +67732,7 @@ var pet;
             return app.Singleton.getInstance(PetModel);
         };
         PetModel.prototype.init = function () {
-            this.gridList = [new EggGridVO(), new EggGridVO(), new EggGridVO(), new EggGridVO()];
+            this.gridList = [new EggGridVO(), new EggGridVO(), new EggGridVO(), new EggGridVO(), new EggGridVO()];
             this.petInfos = [];
             this.tipsList = [];
             this.newPets = [];
@@ -67139,6 +67762,10 @@ var pet;
                 grid.islock = false;
                 grid.id = pspace[i].eggid;
                 grid.endTime = pspace[i].endtime;
+                var leastTime = pspace[i].endtime - game.Context.getServerTime();
+                if (leastTime > 0) {
+                    Laya.timer.once(leastTime * 1000, this, this.onUpdateRedDot);
+                }
             }
             pet.PetModel.getIns().event(pet.PetEvent.PET_EGG_GRID_UPDATE);
         };
@@ -67465,6 +68092,10 @@ var pet;
         PetModel.prototype.getUnlockCost = function () {
             var index = 0;
             for (var i = 0; i < this.gridList.length; i++) {
+                var vipLimit = csv.PetProxy.getIns().getSpaceLimit(i);
+                if (vipLimit) {
+                    continue;
+                }
                 if (this.gridList[i].islock == false) {
                     index++;
                 }
@@ -67719,7 +68350,7 @@ var rank;
             configurable: true
         });
         return RankViewNew;
-    }(ui.paihangbang.tongyongpaihangviewnewUI));
+    }(ui.jingjichang.paihangviewnewUI));
     rank.RankViewNew = RankViewNew;
 })(rank || (rank = {}));
 //# sourceMappingURL=RankItemNew.js.map
@@ -68659,7 +69290,13 @@ var csv;
          * 黑市每日最大刷新次数
          */
         BlackMarketProxy.prototype.getMaxRefreshCnt = function (type) {
-            return game.Config.getIntParams(type == shop.EBlackType.Base ? 973 : 975);
+            var cnt = game.Config.getIntParams(type == shop.EBlackType.Base ? 973 : 975);
+            var viptype = csv.PRI_TYPE.HIGH_MARKET;
+            if (type == shop.EBlackType.Base) {
+                viptype = csv.PRI_TYPE.NORMLA_MARKET;
+            }
+            var total = csv.VipProxy.getIns().getVipPri(viptype, vipcode.VipModel.getIns().vipLvl);
+            return cnt + total;
         };
         // /**
         //  * 黑市自动刷新时间
@@ -69195,6 +69832,15 @@ var shop;
         ShopModel.prototype.buyBlackCallBack = function (data, index, price, cnt) {
             // ShopModel.getIns().buyBlackNew(data[0], cnt, data[1]);
             // this.buyBlack(data[0],cnt);
+            var cfg = csv.BlackMarketProxy.getIns().getCfg(data.mall_id);
+            var xiangyaoTicketId = parseInt(game.Config.getParams(1267).split(";")[0]);
+            if (cfg.item == xiangyaoTicketId) {
+                var limitNum = game.Config.getIntParams(2027);
+                if (game.GridsModel.getIns().getItemCount(cfg.item) >= limitNum) {
+                    manager.FlowManager.instance.flowByStyle1(app.getLang("xiangyaolu_desc06"));
+                    return;
+                }
+            }
             this.buyBlackNew(data, cnt, index, price);
         };
         // /**
@@ -71762,6 +72408,7 @@ var tip;
             this.setBaoshiProp();
             this.setCuilianProp();
             this.setRefineProp();
+            this.setFumoProp();
             this.daojubox.height = this.currH;
             this.currH += tip.TipManager.GAPS.GAP_BOTTOM;
             this.totalHeight = this.currH + this.daojubox.y;
@@ -71769,6 +72416,42 @@ var tip;
             this.zhuangshiimg02.y = this.totalHeight - tip.TipManager.GAPS.GAP_ICON;
             this.height = this.totalHeight;
             this.callHandler.run();
+        };
+        /**
+         * 设置附魔属性
+         */
+        TipEquipView.prototype.setFumoProp = function () {
+            if (this.tipData.fid) {
+                this.addTitleView(app.getLang("附魔效果"));
+                // let addDes = csv.EquipProxy.getIns().getAllAddRefineDes(this.tipData.pos, this.tipData.grade, this.tipData.refineLv);
+                // for (let i: number = 0, len: number = 2; i < len; i++) {
+                var lbl1 = Laya.Pool.getItemByClass("TipLabel", Laya.Label);
+                lbl1.x = 0;
+                lbl1.y = this.currH;
+                lbl1.font = "SimHei";
+                lbl1.fontSize = 20;
+                lbl1.color = game.STYLES.WHITE;
+                lbl1.text = app.getLang(csv.EquipProxy.getIns().getEquipFumoCfgMap(this.tipData.fid).name) + "  Lv." + this.tipData.flv;
+                lbl1.align = "left";
+                this.daojubox.addChild(lbl1);
+                this.labelArr.push(lbl1);
+                this.currH += lbl1.height;
+                this.currH += tip.TipManager.GAPS.GAP_V_LABLE;
+                var lbl2 = Laya.Pool.getItemByClass("TipLabel", Laya.Label);
+                lbl2.x = 0;
+                lbl2.y = this.currH;
+                lbl2.font = "SimHei";
+                lbl2.fontSize = 20;
+                lbl2.color = game.STYLES.WHITE;
+                // let cfg = csv.EquipProxy.getIns().getEquipFumoLvCfgMap(this.tipData.fid, this.tipData.flv);
+                lbl2.text = equip.EquipModel.getIns().getProStr(this.tipData.fid, this.tipData.flv, 2);
+                lbl2.align = "left";
+                this.daojubox.addChild(lbl2);
+                this.labelArr.push(lbl2);
+                this.currH += lbl2.height;
+                this.currH += tip.TipManager.GAPS.GAP_V_LABLE;
+                // }
+            }
         };
         /**
          * 设置基础属性
@@ -72428,6 +73111,19 @@ var tip;
             this.updateBg();
             var isBaoHulu = (this.tipData.itemCfg.type == csv.ItemProxy.TYPES.LIBAO && this.tipData.itemCfg.subtype == csv.ItemProxy.XH_SUB_TYPES.SUB_3);
             this.imgEye.visible = (this.tipData.getBoxRate() != "" && !isBaoHulu);
+            ////================================附魔图纸
+            if (!this.fumoLabel) {
+                this.fumoLabel = new Laya.Image();
+            }
+            this.fumoLabel.visible = false;
+            if (this.tipData.itemCfg.type == csv.ItemProxy.TYPES.FUMO) {
+                this.fumoLabel.visible = true;
+                this.fumoLabel.top = 5;
+                this.fumoLabel.right = 5;
+                this.fumoLabel.skin = "res/static/zhuangbei/bg_jiaobiao_" + this.tipData.itemCfg.p1 + ".png";
+                this.fumoLabel.width = this.fumoLabel.height = 30;
+                this.daojuimg.addChild(this.fumoLabel);
+            }
         };
         TipItemView.prototype.addTwoLabel = function (label1, color1, label2, color2) {
             var lblProp = this.createDescLabel(label1, color1);
@@ -73560,6 +74256,10 @@ var tip;
                 //     //主宠物卸下 辅助宠物全部卸下
                 //     app.ProtocolRequest.PetMoveReq(this.tipView.petSelectVo.rolePos, this.tipView.petSelectVo.data.instid, 0);
                 // }
+            }
+            else if (type == tip.TipManager.TIP_BTN_TYPE.PET_YULAN) {
+                var maxPetVo = pet.PetVO.createMaxPet(this.itemVo.getItemId());
+                tip.TipManager.showPet(maxPetVo);
             }
             else {
                 this.btnSelectHandler(type);
@@ -75447,6 +76147,12 @@ var yuanshencode;
         };
         YuanshenXiuLianView.prototype.updateFabaoBtn = function () {
             var cfg = csv.YuanshenProxy.getIns().getHoleCfgMapItem(this.dataSource.id);
+            if (this.dataSource.id == 6) {
+                this.boxfabao.visible = false;
+            }
+            else {
+                this.boxfabao.visible = true;
+            }
             if (game.Context.teamLv >= cfg.putcondition) {
                 this.btnfabaofangzhi.disabled = false;
                 this.imgdi.visible = false;
@@ -75501,7 +76207,7 @@ var yuanshencode;
             this.animationfaguang.visible = false;
             this.updateFabaoBtn();
             // this.animationfaguang.play();
-            if (fabaonew.FaBaoNewModel.getIns().fabaoYuanshenRedDot(this.dataSource.id)) {
+            if (this.dataSource.id != 6 && fabaonew.FaBaoNewModel.getIns().fabaoYuanshenRedDot(this.dataSource.id)) {
                 game.RedDotView.addTo(this.btnfabaofangzhi);
             }
             else {
@@ -76002,7 +76708,7 @@ var ent;
         function DebugConfig() {
         }
         // public static user:string = "shu22";
-        DebugConfig.user = "hlw"; //m2020_1
+        DebugConfig.user = "T1648618095550"; //m2020_1
         // + Math.floor(Math.random() * 10000);
         DebugConfig.pass = "123456";
         // public static host:string = "192.168.1.11";  //
@@ -76048,7 +76754,32 @@ var ent;
 
 if (window["DEBUG"]) {
     function addtime() {
-        ent.GmDebug.getIns().add_st();
+        ent.GmDebug.getIns().add_st(); //增加一个注释，测试一下Jenkins比对版本编译
+    }
+}
+var olddata;
+function cmd(s) {
+    ent.GmDebug.getIns().cmd(s);
+    // if(s == "f1"){
+    //     let model =yishou.YiShouModel.getIns();
+    //     olddata = model.info.playerData[0];
+    //     model.info.playerData=[];
+    //     model.parse();
+    // }else if(s == "reset"){
+    //     let model =yishou.YiShouModel.getIns();
+    //     model.info.playerData.push(olddata);
+    //     model.parse();
+    // }
+    if (s == "f1") {
+        var model = qiYu.QiYuModel.getIns();
+        olddata = model.info.playerData[0];
+        model.info.playerData = [];
+        model.updateQiYuData(model.info);
+    }
+    else if (s == "reset") {
+        var model = qiYu.QiYuModel.getIns();
+        model.info.playerData.push(olddata);
+        model.updateQiYuData(model.info);
     }
 }
 // function testboss(...ids:number[]){
@@ -76228,7 +76959,7 @@ var app;
     var Version = (function () {
         function Version() {
         }
-        Version.CodeVersion = "v1.0.5_368034";
+        Version.CodeVersion = "v1.0.6_373294";
         return Version;
     }());
     app.Version = Version;
@@ -76351,7 +77082,7 @@ var app;
         // public static getResourceUrl(...resKey:string[]){
         //     resKey.shift()
         // }
-        Config.getResById = function (resKey) {
+        Config.getResById = function (resKey, checkHandler) {
             // let url: string = this.getUrlById(resKey);
             // return Laya.loader.getRes(url);
             var url = this.getUrlById(resKey);
@@ -76359,7 +77090,7 @@ var app;
                 if (game.Context.use_xbin) {
                     if (Laya.loader.getRes(resKey) && !(Laya.loader.getRes(resKey) instanceof Csv)) {
                         var bs = new laya.utils.Byte(Laya.loader.getRes(resKey).asArrayBuffer());
-                        Laya.Loader.loadedMap[Laya.URL.formatURL(url)] = new Csv(null, new ByteCfg(bs));
+                        Laya.Loader.loadedMap[Laya.URL.formatURL(url)] = new Csv(null, new ByteCfg(bs, checkHandler));
                     }
                 }
                 if (Laya.loader.getRes(url) && !(Laya.loader.getRes(url) instanceof Csv)) {
@@ -76608,6 +77339,14 @@ var app;
 //# sourceMappingURL=Igrow_strongData.js.map
 
 //# sourceMappingURL=IguajiData.js.map
+
+//# sourceMappingURL=IguanqiachaperData.js.map
+
+//# sourceMappingURL=IguanqiaData.js.map
+
+//# sourceMappingURL=IguanqiafunctionopData.js.map
+
+//# sourceMappingURL=IguanqiarewardData.js.map
 
 //     Int64.js
 //
@@ -77164,8 +77903,8 @@ var Csv = (function () {
             for (var j = 0, l = keys.length; j < l; ++j) {
                 var t_key = keys[j];
                 obj[t_key] = ds[j];
+                this.arrData.push(obj);
             }
-            this.arrData.push(obj);
         }
     };
     Csv.prototype.getArray = function () {
@@ -78049,13 +78788,14 @@ var SortUtil = (function () {
 //# sourceMappingURL=SortUtil.js.map
 
 var ByteCfg = (function () {
-    function ByteCfg(bs) {
+    function ByteCfg(bs, check) {
         this.poslist = []; //每个节点的坐标列表
         this.strKeyMap = [];
         this.offsetMap = {};
         this.NAB = "NAB";
         //不是缓存,直接注释该字段即可
         this.cache = [];
+        this._check = check;
         this.strposList = [];
         this.myarr = [];
         // this.bufferArr = [];//注释即不使用数据缓存
@@ -78367,7 +79107,14 @@ var ByteCfg = (function () {
             // } else {
             obj = new cfgCls[this._clsName](this, n); //n为坐标索引
             // }
-            arr.push(obj);
+            if (this._check) {
+                if (this._check.runWith(obj)) {
+                    arr.push(obj);
+                }
+            }
+            else {
+                arr.push(obj);
+            }
         }
         this.myarr = arr;
         return arr;
@@ -79919,12 +80666,16 @@ w["YiShouSData"] = YiShouSData;
 w["YiShouPData"] = YiShouPData;
 w["QiYuSData"] = QiYuSData;
 w["QiYuPData"] = QiYuPData;
+w["GongfaData"] = GongfaData;
+w["GongfaAllData"] = GongfaAllData;
 w["WxShareData"] = WxShareData;
 w["WxGmRoleData"] = WxGmRoleData;
+w["WxHelpData"] = WxHelpData;
 w["FumoData"] = FumoData;
 w["ShenbingData"] = ShenbingData;
 w["ShenbingTaskData"] = ShenbingTaskData;
 w["ShenbingGoingData"] = ShenbingGoingData;
+w["ShenbingDBData"] = ShenbingDBData;
 w["ActivityStartTimeAck"] = ActivityStartTimeAck;
 w["GetMainPanelResp"] = GetMainPanelResp;
 w["RecvPrizeResp"] = RecvPrizeResp;
@@ -80210,6 +80961,9 @@ w["GardenPlantUpdateAck"] = GardenPlantUpdateAck;
 w["StartGatherAck"] = StartGatherAck;
 w["EndGatherAck"] = EndGatherAck;
 w["StopGatherAck"] = StopGatherAck;
+w["GongfaDataNtf"] = GongfaDataNtf;
+w["GongfaGraspResp"] = GongfaGraspResp;
+w["GongfaTaskResp"] = GongfaTaskResp;
 w["GuardNtf"] = GuardNtf;
 w["SpeedGuardAck"] = SpeedGuardAck;
 w["AwardGuardAck"] = AwardGuardAck;
@@ -80436,6 +81190,9 @@ w["MountainInfoAck"] = MountainInfoAck;
 w["MountainChallengeAck"] = MountainChallengeAck;
 w["MountainSweepAck"] = MountainSweepAck;
 w["AwardMountainAck"] = AwardMountainAck;
+w["FmbkInfoNtf"] = FmbkInfoNtf;
+w["FmbkChallengeAck"] = FmbkChallengeAck;
+w["FmbkSweepAck"] = FmbkSweepAck;
 w["PeakNtf"] = PeakNtf;
 w["ModifyPeakNtf"] = ModifyPeakNtf;
 w["PeakTaskNtf"] = PeakTaskNtf;
@@ -80506,6 +81263,7 @@ w["CrossSecSoulSetBattleArrayAck"] = CrossSecSoulSetBattleArrayAck;
 w["CrossSecSoulTimeNtf"] = CrossSecSoulTimeNtf;
 w["OpenDongfuResp"] = OpenDongfuResp;
 w["DongfuMagicLayResp"] = DongfuMagicLayResp;
+w["SecSoulAutoTupoAck"] = SecSoulAutoTupoAck;
 w["SevenInfoAck"] = SevenInfoAck;
 w["SevenUpAck"] = SevenUpAck;
 w["SevenSpiritLvAck"] = SevenSpiritLvAck;
