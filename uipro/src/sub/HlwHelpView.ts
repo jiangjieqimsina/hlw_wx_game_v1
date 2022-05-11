@@ -11,12 +11,11 @@ namespace sub
             this.on(Laya.Event.DISPLAY,this,this.onDisplay);
             this.on(Laya.Event.UNDISPLAY,this,this.onUnDisplay);
             // this.graphics.drawRect(0,0,this.width,this.height,null,"#ff0000",1);
+            this.showlist.scaleX = this.showlist.scaleY = 0.8;
+            this.showlist.spaceX = 4;
         }
 
-        private onDisplay():void{
-            this.x = (Laya.stage.width - this.width)/2;
-            this.y = (Laya.stage.height - this.height)/2;
-            // console.log("HlwRankView!!!");
+        private onOpen():void{
             let _that = this;
             //获取好友列表数据
             wx.getFriendCloudStorage({
@@ -39,12 +38,20 @@ namespace sub
             });
         }
 
+        private onDisplay():void{
+            // this.x = (Laya.stage.width - this.width)/2;
+            // this.y = (Laya.stage.height - this.height)/2;
+            // console.log("HlwRankView!!!");
+            // Laya.timer.once(300,this,this.onOpen);//pop需要300毫秒
+            this.onOpen();
+        }
+
         private onUnDisplay():void{
-            // console.log("rank is onUnDisplay!");
+            // console.log("HlwHelpView is onUnDisplay!");
         }
 
         private onRenderHandler(item:ui.HelpItemVIewUI,index:number):void{
-            console.log(item.dataSource);
+            // console.log(item.dataSource);
             item.img.skin = item.dataSource.avatarUrl;
             // // console.log(item.dataSource);
             // item.hitArea = new Laya.Rectangle(0,0,item.width,item.height);
