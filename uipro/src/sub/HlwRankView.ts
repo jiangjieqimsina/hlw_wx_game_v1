@@ -128,7 +128,7 @@ namespace sub {
         }
 
         private onYaoQing():void{
-            game_share(this.curData.openid);
+            window['tr_wx_game_share'](this.curData.openid);
         }
 
         public setData(data):void{
@@ -259,4 +259,5 @@ namespace sub {
             item.setData(item.dataSource,index);
         }
     }
+    window["tr_wx_game_share"] = game_share;
 }
