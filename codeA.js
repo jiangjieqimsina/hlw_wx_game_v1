@@ -4892,6 +4892,62 @@ var ui;
     })(chenghao = ui.chenghao || (ui.chenghao = {}));
 })(ui || (ui = {}));
 (function (ui) {
+    var chengjiu;
+    (function (chengjiu) {
+        var chengjiuitemUI = (function (_super) {
+            __extends(chengjiuitemUI, _super);
+            function chengjiuitemUI() {
+                return _super.call(this) || this;
+            }
+            chengjiuitemUI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.loadUI("chengjiu/chengjiuitem");
+            };
+            return chengjiuitemUI;
+        }(View));
+        chengjiu.chengjiuitemUI = chengjiuitemUI;
+    })(chengjiu = ui.chengjiu || (ui.chengjiu = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var chengjiu;
+    (function (chengjiu) {
+        var chengjiuitem01UI = (function (_super) {
+            __extends(chengjiuitem01UI, _super);
+            function chengjiuitem01UI() {
+                return _super.call(this) || this;
+            }
+            chengjiuitem01UI.prototype.createChildren = function () {
+                View.regComponent("ui.bag.bagitemUI", ui.bag.bagitemUI);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("chengjiu/chengjiuitem01");
+            };
+            return chengjiuitem01UI;
+        }(View));
+        chengjiu.chengjiuitem01UI = chengjiuitem01UI;
+    })(chengjiu = ui.chengjiu || (ui.chengjiu = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var chengjiu;
+    (function (chengjiu) {
+        var chengjiuviewUI = (function (_super) {
+            __extends(chengjiuviewUI, _super);
+            function chengjiuviewUI() {
+                return _super.call(this) || this;
+            }
+            chengjiuviewUI.prototype.createChildren = function () {
+                View.regComponent("ui.chengjiu.chengjiuitemUI", ui.chengjiu.chengjiuitemUI);
+                View.regComponent("ui.chengjiu.chengjiuitem01UI", ui.chengjiu.chengjiuitem01UI);
+                View.regComponent("grids.GridView", grids.GridView);
+                View.regComponent("Laya.UiAnimation", Laya.UiAnimation);
+                _super.prototype.createChildren.call(this);
+                this.loadUI("chengjiu/chengjiuview");
+            };
+            return chengjiuviewUI;
+        }(View));
+        chengjiu.chengjiuviewUI = chengjiuviewUI;
+    })(chengjiu = ui.chengjiu || (ui.chengjiu = {}));
+})(ui || (ui = {}));
+(function (ui) {
     var chongwu;
     (function (chongwu) {
         var chognwugeziitemUI = (function (_super) {
@@ -32214,7 +32270,9 @@ var common;
     var CommonWindow10 = (function (_super) {
         __extends(CommonWindow10, _super);
         function CommonWindow10() {
-            return _super !== null && _super.apply(this, arguments) || this;
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.fullScreen = "fullScreen";
+            return _this;
         }
         CommonWindow10.getIns = function () {
             return app.Singleton.getInstance(CommonWindow10);
@@ -32242,7 +32300,9 @@ var common;
     var CommonWindow11 = (function (_super) {
         __extends(CommonWindow11, _super);
         function CommonWindow11() {
-            return _super !== null && _super.apply(this, arguments) || this;
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.fullScreen = "fullScreen";
+            return _this;
         }
         CommonWindow11.getIns = function () {
             return app.Singleton.getInstance(CommonWindow11);
@@ -59974,6 +60034,7 @@ var game;
             }
             this._jihuoData.callback = null;
             this.callLater(this.refreshAll1);
+            app.ViewManager.dellToggleList();
         };
         JiHuoSuccessView.prototype.refreshAll1 = function () {
             if (xianshimiaosha.XianShiMiaoShaModle.getIns().mountData && xianshimiaosha.XianShiMiaoShaModle.getIns().mountData.length > 0) {
@@ -64483,6 +64544,8 @@ var guaji;
         GuajiModel.GUAJI_MINUTE_EXP_CHANGE = "guaji_minute_exp_change";
         GuajiModel.GUAJIPASS_DATA_UPDATE = "guaji_pass_data_update";
         GuajiModel.GUAJI_REDDOT_CHANGE = "guaji_reddot_change";
+        /**挂机收益奖励领取更新 */
+        GuajiModel.GUAJI_GETREWARD_UPDATE = "GUAJI_GETREWARD_UPDATE";
         return GuajiModel;
     }(app.ModelBase));
     guaji.GuajiModel = GuajiModel;
@@ -76708,7 +76771,7 @@ var ent;
         function DebugConfig() {
         }
         // public static user:string = "shu22";
-        DebugConfig.user = "T1648618095550"; //m2020_1
+        DebugConfig.user = "ceshi1"; //m2020_1
         // + Math.floor(Math.random() * 10000);
         DebugConfig.pass = "123456";
         // public static host:string = "192.168.1.11";  //
@@ -76959,7 +77022,7 @@ var app;
     var Version = (function () {
         function Version() {
         }
-        Version.CodeVersion = "v1.0.6_373294";
+        Version.CodeVersion = "v1.0.6_373846wx";
         return Version;
     }());
     app.Version = Version;
@@ -77347,6 +77410,8 @@ var app;
 //# sourceMappingURL=IguanqiafunctionopData.js.map
 
 //# sourceMappingURL=IguanqiarewardData.js.map
+
+//# sourceMappingURL=IguardData.js.map
 
 //     Int64.js
 //

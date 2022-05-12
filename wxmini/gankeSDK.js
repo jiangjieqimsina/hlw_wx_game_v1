@@ -664,7 +664,7 @@ GameWXmini.getSystemInfo = function() {
       console.log("=====================================================");
       console.log(_lauchInfo);
       console.log(_lauchInfo.query);
-      return _lauchInfo.query?{uid: _lauchInfo.query.uid, tasktype: _lauchInfo.query.tasktype}:"0";
+      return _lauchInfo;//.query?{uid: _lauchInfo.query.uid, tasktype: _lauchInfo.query.tasktype}:"0";
     }
   
     //上传一起游玩好友至开放域
